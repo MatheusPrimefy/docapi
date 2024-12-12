@@ -75,7 +75,7 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Establishments",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -83,7 +83,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Users",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -91,7 +91,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Customers",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -99,7 +99,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Payment links",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -107,7 +107,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Payment Split",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -115,7 +115,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Products",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -123,7 +123,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Discount Coupons",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -131,7 +131,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Sales",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -139,7 +139,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Signatures",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -147,7 +147,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Financial",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -155,7 +155,7 @@
       ]
     },
      {
-      "group": "Endpoint Examples",
+      "group": "Webhooks",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",

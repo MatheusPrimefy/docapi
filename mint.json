@@ -78,16 +78,16 @@
     {
       "group": "Establishments",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/Establishments/get",
+        "api-reference/Establishments/create",
+        "api-reference/Establishments/delete"
       ]
     },
      {
       "group": "Users",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
+        "api-reference/user/get",
+        "api-reference/user/create",
         "api-reference/endpoint/delete"
       ]
     },

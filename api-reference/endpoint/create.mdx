@@ -3,6 +3,26 @@ title: 'Add a new establishment - Individual (Individual seller)'
 api: 'POST {{baseUrl}}/signup/'
 ---
 
+# Registering an establishment as Individual - Individual seller
+
+For an Individual seller to use Primefy as a partner for payment processing and more, some information is required, as follows:
+
+>
+
+💡 If you want to register a Legal Entity establishment, follow this [documentation](https://www.notion.so/POST-Add-a-new-establishment-Commercial-Legal-Entity-f58baa5a101d4db5bdc282c525897192?pvs=21).
+
+>
+
+💡 The Plans are associated with commercial rates and must be applied during the establishment registration. The Plan's name will be provided by the Primefy sales team.
+
+>
+
+💡 The fields that expect Base64 values must be correctly converted and have a valid Base64 value. You can use online converters for this purpose.
+
+>
+
+ℹ️ "Learn more about baseUrl and other important information [here](https://www.notion.so/Introduction-56b6fae212584d0688ad73fa27503cc9?pvs=21).
+
 ## Step 1: Creating the user/establishment:
 
 * Request type: **\[POST]**
@@ -11,15 +31,13 @@ api: 'POST {{baseUrl}}/signup/'
 {{**baseUrl**}}/signup/
 ```
 
-<Info>
-  💡 To register an establishment within the same business, the 'businessId' property, containing the Business number, must be provided in the following body:
-</info>
+> 💡 To register an establishment within the same business, the 'businessId' property, containing the Business number, must be provided in the following body:
 
 * Body
 
 ```json
 {
-		"businessId": 1010, // use this only to register the new establishment within an existing business
+   	"businessId": 1010, // use this only to register the new establishment within an existing business
     "plan": "standard",
     "identificationNumber": "74559147922",
     "name": "Sueli Esther Moura",
@@ -39,234 +57,3 @@ api: 'POST {{baseUrl}}/signup/'
     "status": "onboarding"
 }
 ```
-
-<info>
-  💡 From this point on, all *endpoints* are protected and require the POST to be authenticated. Check [here](https://www.notion.so/POST-Authentication-0e00c292d14f4e2dbacacb11238fd4e6?pvs=21) how to generate the token for the user.
-</info>
-
-## Step 2: Owner
-
-* Request type: **\[POST]**
-
-```json
-{{**baseUrl**}}/signup/stores/:store-id/owner-details/
-```
-
-* Body
-
-```json
-{
-    "fullName": "Sueli Esther Moura",
-    "identificationNumber": "74559147922",
-    "birthdate": "2010-12-13",
-    "phone": "(11) 3531-1472"
-}
-```
-
-* Response
-
-```json
-{
-    "id": 177,
-    "storeId": 705,
-    "fullName": "Sueli Esther Moura",
-    "identificationNumber": "74559147922",
-    "birthDate": "2010-12-13",
-    "phone": "(11) 3531-1472"
-}
-```
-
-## Step 3: Establishment Details
-
-* Request type: **\[POST]**
-
-```json
-{{**baseUrl**}}/signup/stores/:store-id/business-details
-```
-
-<info>
-  💡 The MCC can be obtained from the Primefy sales team.
-</info>
-
-* Body
-
-```json
-{
-		"mcc": "107",
-    "companyName": "Sueli Esther Moura 74559147922",
-    "socialName": "Quick Wash Lava-Rapido",
-    "encodedLogoImage": "base64EncondedFile"
-}
-```
-
-* Response
-
-```json
-{
-    "id": 704,
-    "companyName": "Sueli Esther Moura 74559147922",
-    "socialName": "Quick Wash Lava-Rapido",
-    "mcc": 107,
-    "logoPath": "https://preme.s3.us-east-2.amazonaws.com/logotipos/01a7afa6-a19e-4cb4-a870-0a94745fc514.png"
-}
-```
-
-## Step 4: Address
-
-* Request type: **\[POST]**
-
-```json
-{{**baseUrl**}}/signup/stores/:store-id/address
-```
-
-* Body
-
-```json
-{
-    "street": "Alberto Santos Dummond",
-    "number": 124,
-    "reference": null,
-    "district": "São José",
-    "zipCode": "14800000",
-    "state": "SP",
-    "city": "São Paulo",
-    "country": "BR"
-}
-```
-
-* Response
-
-```json
-{
-    "id": 705,
-    "businessId": 453,
-    "identificationNumber": "74559147922",
-    "companyName": "Sueli Esther Moura 74559147922",
-    "socialName": "Quick Wash Lava-Rapido",
-    "name": "Quick Wash Lava-Rapido",
-    "logoPath": "https://preme.s3.us-east-2.amazonaws.com/logotipos/a8675258-395d-4e3d-9f52-46f21c0d64b3.png",
-    "email": "sueli_moura@centroin.com.br",
-    "phone": "(11) 3531-1472",
-    "address": {
-        "street": "Alberto Santos Dummond",
-        "number": "124",
-        "reference": null,
-        "district": "São José",
-        "city": "São Paulo",
-        "zipCode": "14800000",
-        "state": "SP",
-        "country": "BR"
-    },
-    "owner": {
-        "id": 177,
-        "storeId": 705,
-        "fullName": "Sueli Esther Moura",
-        "identificationNumber": "74559147922",
-        "birthDate": "12/13/2010 00:00:00",
-        "phone": "(11) 3531-1472",
-        "address": {
-            "street": "Alberto Santos Dummond",
-            "number": "124",
-            "reference": null,
-            "district": "São José",
-            "city": "São Paulo",
-            "zipCode": "14800000",
-            "state": "SP",
-            "country": "BR"
-        }
-    },
-    "status": "pending",
-    "createdOn": "2022-09-26T15:37:44",
-    "updatedOn": "2022-09-26T15:55:26.5924684Z"
-}
-```
-
-## Step 5: Bank Account
-
-The bank account is required for the establishment to be approved to start its sales. Check [this link](https://www.notion.so/POST-Create-a-bank-account-93ac15b471d04f1f8f2cba2bf5553efd?pvs=21) on how to create the bank account
-
-## Step 6: Documents
-
-* Request type: **\[POST]**
-
-```json
-{{**baseUrl**}}/signup/stores/:store-id/documents
-```
-
-* Body
-
-```json
-[
-    {
-        "type": "atividade",
-        "encodedFile": "base64EncondedFile"
-		},
-    {
-        "type": "residencia",
-        "encodedFile": "base64EncondedFile"
-		},
-    {
-        "type": "identificacao",
-        "encodedFile": "base64EncondedFile"
-		},
-		{
-        "type": "identificacao",
-        "encodedFile": "base64EncondedFile"
-		}
-]
-```
-
-* Response
-
-```json
-[
-    {
-        "storeId": 705,
-        "documents": [
-            {
-                "type": "Atividade",
-                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/atividade/f4e83200-5dc6-48d8-b398-8d7e126cfbc5.png"
-            },
-            {
-                "type": "Residencia",
-                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/residencia/bf2d523d-6bdf-484c-b00a-66894033384e.png"
-            },
-            {
-                "type": "Identificacao",
-                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/identificacao/006d5cfe-6fcb-4037-8f74-7d203cdb5392.png"
-            },
-						{
-                "type": "Identificacao",
-                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/identificacao/127d5cfe-6fxb-9950-8f74-7d203rdo5392.png"
-            }
-        ]
-    }
-]
-```
-
-If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
-
-* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
-  {
-    "type": "https://httpstatuses.com/401",
-    "title": "Unauthorized",
-    "status": 401,
-    "detail": null,
-    "instance": null,
-    "extensions": {}
-  }
-  ```
-
-* 403: ForbiddenThis is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.```json
-  {
-    "type": "https://httpstatuses.com/403",
-    "title": "Forbidden",
-    "status": 403,
-    "detail": null,
-    "instance": null,
-    "extensions": {}
-  }
-  ```
-
-

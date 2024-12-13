@@ -27,8 +27,6 @@ It's quite simple to update data for an Establishment using the Primefy API. By 
 
 If your request is successful, you will receive the updated Establishment object as the response.
 
-* 200: OK
-
 <Accordion title="200: OK">
   ```json
     {
@@ -73,28 +71,34 @@ If your request is successful, you will receive the updated Establishment object
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
-* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+<Accordion title="401 Unauthorized">
+  ```json
+   This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+   
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    
+  ```
+</Accordion>
 
-```json
-  {
-    "type": "https://httpstatuses.com/401",
-    "title": "Unauthorized",
-    "status": 401,
-    "detail": null,
-    "instance": null,
-    "extensions": {}
-  }
-```
+> If needed, you can review our [authentication process](https://primefy-e56fa2d4.mintlify.app/api-reference/Authentication).
 
-* 403: ForbiddenThis is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.
-
-```json
-  {
-    "type": "https://httpstatuses.com/403",
-    "title": "Forbidden",
-    "status": 403,
-    "detail": null,
-    "instance": null,
-    "extensions": {}
-  }
-```
+<Accordion title="403 Forbidden">
+  ```json
+  This is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+  ```
+</Accordion>

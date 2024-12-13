@@ -78,7 +78,7 @@
     {
       "group": "Establishments",
       "pages": [
-        "api-reference/Establishments/get",
+        "api-reference/Establishments/creat",
         "api-reference/Establishments/create",
         "api-reference/Establishments/put",
         "api-reference/Establishments/delete"

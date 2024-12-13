@@ -1,0 +1,277 @@
+---
+title: 'Add a new establishment - Commercial (Legal Entity)'
+openapi: 'POST'
+---
+
+# Registering a Commercial Establishment - Legal Entity
+
+For a Legal Entity to use Primefy as a partner for payment processing and more, some information is required, as follows:
+
+>
+  💡 If you want to register an Individual seller establishment, follow [this documentation](https://www.notion.so/POST-Add-a-new-establishment-Individual-Individual-seller-98bec8f6cc67425ea544952fa741d317?pvs=21).
+
+
+>
+  💡 The Plans are associated with commercial rates and must be applied during the establishment registration. The Plan's name will be provided by the Primefy sales team.
+
+
+>
+  💡 The fields that expect Base64 values must be correctly converted and have a valid Base64 value. You can use online converters for this purpose.
+
+
+>
+  ℹ️ Learn more about baseUrl and other important information [here](https://www.notion.so/Introduction-56b6fae212584d0688ad73fa27503cc9?pvs=21).
+
+
+## Step 1: Creating the user/establishment
+
+* Request type: **\[POST]**
+
+```json
+{{**baseUrl**}}/signup/
+```
+
+>
+  💡 To create an establishment within the same business, the 'businessId' property, containing the Business number, must be provided in the following body:
+
+
+* Body
+
+```json
+{
+    "plan": "standard",
+    "identificationNumber": "05356322000191",
+    "name": "Enrico e Juliana Fotografias Ltda",
+    "email": "compras@enricoejulianafotografiasltda.com.br",
+    "password": "P,8{j|56ip|H|Ehur8;fN32BB{O%n7|X"
+}
+```
+
+* Response
+
+```json
+{
+    "id": 836,
+    "name": "Enrico e Juliana Fotografias Ltda",
+    "identificationNumber": "05356322000191",
+    "email": "compras@enricoejulianafotografiasltda.com.br",
+    "status": "onboarding"
+}
+```
+
+>
+  💡 From this point on, all *endpoints* are protected and require the POST to be authenticated. Check [here](https://www.notion.so/POST-Authentication-0e00c292d14f4e2dbacacb11238fd4e6?pvs=21) how to generate the token for the user.
+
+
+## Step 2: Establishment Details
+
+* Request type: **\[POST]**
+
+```json
+{{**baseUrl**}}/signup/stores/:store-id/business-details
+```
+
+>
+  💡 The MCC can be obtained from the Primefy sales team.
+
+
+* Body
+
+```json
+{
+		"mcc": "49",
+    "companyName": "Enrico e Juliana Fotografias Ltda",
+    "socialName": "Studio Bons Momentos Fotografia",    
+		"encodedLogoImage": "base64EncondedFile"
+}
+```
+
+* Response
+
+```json
+{
+    "id": 836,
+    "companyName": "Enrico e Juliana Fotografias Ltda",
+    "socialName": "Studio Bons Momentos Fotografia",
+    "mcc": 49,
+    "logoPath": "https://preme.s3.us-east-2.amazonaws.com/logotipos/01a7afa6-a19e-4cb4-a870-0a94745fc514.png"
+}
+```
+
+## Step 3: Address
+
+* Request type: **\[POST]**
+
+```json
+{{**baseUrl**}}/signup/stores/:store-id/address
+```
+
+* Body
+
+```json
+{
+    "street": "Rua da Borboleta",
+    "number": "105",
+    "reference": null,
+    "district": "Anil",
+    "zipCode": "79096819",
+    "state": "MA",
+    "city": "São Luís",
+    "country": "BR"
+}
+```
+
+* Response
+
+```json
+{
+    "id": 836,
+    "businessId": 577,
+    "identificationNumber": "05356322000191",
+    "companyName": "Enrico e Juliana Fotografias Ltda",
+    "socialName": "Studio Bons Momentos Fotografia",
+    "name": "Studio Bons Momentos Fotografia",
+    "logoPath": null,
+    "email": "compras@enricoejulianafotografiasltda.com.br",
+    "phone": null,
+    "address": {
+        "street": "Rua da Borboleta",
+        "number": "105",
+        "reference": null,
+        "district": "Anil",
+        "city": "São Luís",
+        "zipCode": "79096819",
+        "state": "MA",
+        "country": "BR"
+    },
+    "owner": null,
+    "status": "onboarding",
+    "createdOn": "2023-02-07T13:15:15",
+    "updatedOn": "2023-02-07T13:22:43.7245768Z"
+}
+```
+
+## Step 4: Owner
+
+* Request type: **\[POST]**
+
+```json
+{{**baseUrl**}}/signup/stores/:store-id/owner-details/
+```
+
+>
+  💡 To register the owner, the `identificationNumber` field needs to be the CPF.
+
+
+* Body
+
+```json
+{
+    "fullName": "Vanessa Juliana Duarte",
+    "identificationNumber": "99649185852",
+    "birthdate": "1995-07-21",
+    "phone": "(67) 99138-8954"
+}
+```
+
+* Response
+
+```json
+{
+    "id": 219,
+    "storeId": 836,
+    "fullName": "Vanessa Juliana Duarte",
+    "identificationNumber": "99649185852",
+    "birthDate": "1995-07-21",
+    "phone": "(67) 99138-8954"
+}
+```
+
+## Step 5: Bank Account
+
+The bank account is required for the establishment to be approved to start its sales. Check [this link](https://www.notion.so/POST-Create-a-bank-account-93ac15b471d04f1f8f2cba2bf5553efd?pvs=21) on how to create the bank account.
+
+## Step 6: Documents
+
+* Request type: **\[POST]**
+
+```json
+{{**baseUrl**}}/signup/stores/:store-id/documents
+```
+
+* Body
+
+```json
+[
+    {
+        "type": "atividade",
+        "encodedFile": "base64EncondedFile"
+		},
+    {
+        "type": "residencia",
+        "encodedFile": "base64EncondedFile"
+		},
+    {
+        "type": "identificacao",
+        "encodedFile": "base64EncondedFile"
+		},
+		{
+        "type": "identificacao",
+        "encodedFile": "base64EncondedFile"
+		}
+]
+```
+
+* Response
+
+```json
+[
+    {
+        "storeId": 836,
+        "documents": [
+            {
+                "type": "Atividade",
+                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/atividade/f4e83200-5dc6-48d8-b398-8d7e126cfbc5.png"
+            },
+            {
+                "type": "Residencia",
+                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/residencia/bf2d523d-6bdf-484c-b00a-66894033384e.png"
+            },
+            {
+                "type": "Identificacao",
+                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/identificacao/006d5cfe-6fcb-4037-8f74-7d203cdb5392.png"
+            },
+						{
+                "type": "Identificacao",
+                "filePath": "https://preme.s3.us-east-2.amazonaws.com/documentos/identificacao/127d5cfe-6fxb-9950-8f74-7d203rdo5392.png"
+            }
+        ]
+    }
+]
+```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```

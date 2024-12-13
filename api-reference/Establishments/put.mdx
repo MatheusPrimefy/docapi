@@ -29,45 +29,47 @@ If your request is successful, you will receive the updated Establishment object
 
 * 200: OK
 
-```json
-  {
-      "id": 617,
-      "businessId": 402,
-      "identificationNumber": "18661748000109",
-      "name": "Isaac e Marcelo Transportes ME",
-      "socialName": "Fast & Furious Transport",
-      "phone": "(11) 99999-9119",
-      "email": "presidencia@isaacemarcelotransportesme.com.br",
-      "address": {
-          "street": "Avenida Dino Bueno",
-          "number": "416",
-          "zipCode": "11030351",
-          "reference": null,
-          "district": "Perdizes",
-          "city": "Santos",
-          "state": 24,
-          "country": 0
-      },
-      "dealType": 0,
-      "encodedLogoImage": null,
-      "logoPath": "https://preme.s3.us-east-2.amazonaws.com/logotipos/6b0fcbc9-ab1c-4820-951e-933cef5a75cb.png",
-      "status": "pending",
-      "storeSettings": null,
-      "owner": null,
-      "mcc": 8299,
-      "bankAccounts": [],
-      "documents": null,
-      "user": null,
-      "fees": [],
-      "isForeigner": false,
-      "fxMerchant": null,
-      "generateInvoice": false,
-      "updatedOn": "2022-08-16T14:28:10",
-      "applySplitsAfterOrder": false,
-      "storeEndpoints": null,
-      "merchantName": null
-  }
-```
+<Accordion title="200: OK">
+  ```json
+    {
+        "id": 617,
+        "businessId": 402,
+        "identificationNumber": "18661748000109",
+        "name": "Isaac e Marcelo Transportes ME",
+        "socialName": "Fast & Furious Transport",
+        "phone": "(11) 99999-9119",
+        "email": "presidencia@isaacemarcelotransportesme.com.br",
+        "address": {
+            "street": "Avenida Dino Bueno",
+            "number": "416",
+            "zipCode": "11030351",
+            "reference": null,
+            "district": "Perdizes",
+            "city": "Santos",
+            "state": 24,
+            "country": 0
+        },
+        "dealType": 0,
+        "encodedLogoImage": null,
+        "logoPath": "https://preme.s3.us-east-2.amazonaws.com/logotipos/6b0fcbc9-ab1c-4820-951e-933cef5a75cb.png",
+        "status": "pending",
+        "storeSettings": null,
+        "owner": null,
+        "mcc": 8299,
+        "bankAccounts": [],
+        "documents": null,
+        "user": null,
+        "fees": [],
+        "isForeigner": false,
+        "fxMerchant": null,
+        "generateInvoice": false,
+        "updatedOn": "2022-08-16T14:28:10",
+        "applySplitsAfterOrder": false,
+        "storeEndpoints": null,
+        "merchantName": null
+    }
+  ```
+</Accordion>
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 

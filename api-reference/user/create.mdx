@@ -2,3 +2,167 @@
 title: 'Add user'
 api: POST 'https://api.premepay.com/v1/users'
 ---
+
+Follow the route above to make a request and add a new user to use the API. You will need to send the request containing some mandatory fields. Below, you can view our List of Field Descriptions for Adding User.
+
+>
+  <img src="https://www.notion.so/icons/light-bulb_red.svg" alt="https://www.notion.so/icons/light-bulb_red.svg" width="40px" /> **Business type users** have access to all the Stores associated with a Business, while **Store type users** have access only to the Store they are associated with.
+
+
+### List of Parameters
+
+| **Parameter** | Type   | Description       | Required |
+| ------------- | ------ | ----------------- | -------- |
+| `name`        | string | Name              | Yes      |
+| `username`    | email  | Email             | Yes      |
+| `password`    | string | Password          | Yes      |
+| `permission`  | object | Permission        | No       |
+| `entityId`    | int    | Identifier        | Yes      |
+| `entityType`  | string | Store or Business | Yes      |
+| `role`        | int    | Permission level  | Yes      |
+
+> **Role** is related to the user's access level and accepts the following integer values.
+
+> **EntityId** is the ID of the store or business where the user will have access.
+
+| Role | Permission level |
+| ---- | ---------------- |
+| `0`  | Owner            |
+| `1`  | Administrator    |
+| `2`  | Agent            |
+| `3`  | ViewOnly         |
+| `4`  | API              |
+
+### Example of a request for creating Business type users:
+
+This is an example of how your request should look like for creating Business type users.
+
+* Body
+
+```json
+  {
+  	"name":"Natália Clara Rosângela Souza",
+  	"username":"natalia.clara.souza@alemponte.com.br",
+  	"password":"70jSGgH7eL",
+  	"permission":{
+  		"entityId": 1,
+  		"entityType":"Business",
+  		"role": 0
+  	}
+  }
+```
+
+### **Response**
+
+If your request is successful, you will receive the user object as the response.
+
+* 200: OK
+
+```json
+  {
+  	"id": 1430,
+  	"name": "Natália Clara Rosângela Souza",
+  	"username": "natalia.clara.souza@alemponte.com.br",
+  	"permission": {
+  		"entityId": 109,
+  		"entityType": "Business",
+  		"role": 0
+  	}
+  }
+```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible responses:
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+
+```json
+  {
+  "type": "[https://httpstatuses.com/403](https://httpstatuses.com/403)",
+  "title": "Forbidden",
+  "status": 403,
+  "detail": null,
+  "instance": null,
+  "extensions": {}
+  }
+```
+
+### Example of a request for creating Store type users
+
+This is an example of how your request should look like for creating Store type users.
+
+* Body
+
+```json
+  {
+  	"name":"Gabriel Matheus da Paz",
+  	"username":"gabrielmatheusdapaz@maorifilmes.com.br",
+  	"password":"WagCbPabfZ",
+  	"permission":{
+  		"entityId": 189,
+  		"entityType":"Store",
+  		"role": 0
+  	}
+  }
+```
+
+### **Responses**
+
+If your request is successful, you will receive the user object as the response.
+
+* 200: OK
+
+```json
+  {
+  	"id": 4313,
+  	"name":"Gabriel Matheus da Paz",
+  	"username":"gabrielmatheusdapaz@maorifilmes.com.br",
+  	"permission": {
+  		"entityId": 359,
+  		"entityType": "Store",
+  		"role": 0
+  	}
+  }
+```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+
+```json
+  {
+  "type": "[https://httpstatuses.com/403](https://httpstatuses.com/403)",
+  "title": "Forbidden",
+  "status": 403,
+  "detail": null,
+  "instance": null,
+  "extensions": {}
+  }
+```

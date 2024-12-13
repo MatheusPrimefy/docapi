@@ -1,6 +1,6 @@
 ---
 title: 'Add a new establishment - Commercial (Legal Entity)'
-openapi: 'POST'
+openapi: 'POST {{baseUrl}}/signup/'
 ---
 
 # Registering a Commercial Establishment - Legal Entity
@@ -8,20 +8,20 @@ openapi: 'POST'
 For a Legal Entity to use Primefy as a partner for payment processing and more, some information is required, as follows:
 
 >
-  💡 If you want to register an Individual seller establishment, follow [this documentation](https://www.notion.so/POST-Add-a-new-establishment-Individual-Individual-seller-98bec8f6cc67425ea544952fa741d317?pvs=21).
 
-
->
-  💡 The Plans are associated with commercial rates and must be applied during the establishment registration. The Plan's name will be provided by the Primefy sales team.
-
+💡 If you want to register an Individual seller establishment, follow [this documentation](https://www.notion.so/POST-Add-a-new-establishment-Individual-Individual-seller-98bec8f6cc67425ea544952fa741d317?pvs=21).
 
 >
-  💡 The fields that expect Base64 values must be correctly converted and have a valid Base64 value. You can use online converters for this purpose.
 
+💡 The Plans are associated with commercial rates and must be applied during the establishment registration. The Plan's name will be provided by the Primefy sales team.
 
 >
-  ℹ️ Learn more about baseUrl and other important information [here](https://www.notion.so/Introduction-56b6fae212584d0688ad73fa27503cc9?pvs=21).
 
+💡 The fields that expect Base64 values must be correctly converted and have a valid Base64 value. You can use online converters for this purpose.
+
+>
+
+ℹ️ Learn more about baseUrl and other important information [here](https://www.notion.so/Introduction-56b6fae212584d0688ad73fa27503cc9?pvs=21).
 
 ## Step 1: Creating the user/establishment
 
@@ -32,8 +32,8 @@ For a Legal Entity to use Primefy as a partner for payment processing and more, 
 ```
 
 >
-  💡 To create an establishment within the same business, the 'businessId' property, containing the Business number, must be provided in the following body:
 
+💡 To create an establishment within the same business, the 'businessId' property, containing the Business number, must be provided in the following body:
 
 * Body
 
@@ -60,8 +60,8 @@ For a Legal Entity to use Primefy as a partner for payment processing and more, 
 ```
 
 >
-  💡 From this point on, all *endpoints* are protected and require the POST to be authenticated. Check [here](https://www.notion.so/POST-Authentication-0e00c292d14f4e2dbacacb11238fd4e6?pvs=21) how to generate the token for the user.
 
+💡 From this point on, all *endpoints* are protected and require the POST to be authenticated. Check [here](https://www.notion.so/POST-Authentication-0e00c292d14f4e2dbacacb11238fd4e6?pvs=21) how to generate the token for the user.
 
 ## Step 2: Establishment Details
 
@@ -72,8 +72,8 @@ For a Legal Entity to use Primefy as a partner for payment processing and more, 
 ```
 
 >
-  💡 The MCC can be obtained from the Primefy sales team.
 
+💡 The MCC can be obtained from the Primefy sales team.
 
 * Body
 
@@ -160,8 +160,8 @@ For a Legal Entity to use Primefy as a partner for payment processing and more, 
 ```
 
 >
-  💡 To register the owner, the `identificationNumber` field needs to be the CPF.
 
+💡 To register the owner, the `identificationNumber` field needs to be the CPF.
 
 * Body
 
@@ -253,6 +253,7 @@ The bank account is required for the establishment to be approved to start its s
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+
 ```json
   {
     "type": "https://httpstatuses.com/401",
@@ -262,9 +263,10 @@ If your request has invalid creation parameters - for example, specifying an inv
     "instance": null,
     "extensions": {}
   }
-  ```
+```
 
 * 403: ForbiddenThis is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.
+
 ```json
   {
     "type": "https://httpstatuses.com/403",
@@ -274,4 +276,4 @@ If your request has invalid creation parameters - for example, specifying an inv
     "instance": null,
     "extensions": {}
   }
-  ```
+```

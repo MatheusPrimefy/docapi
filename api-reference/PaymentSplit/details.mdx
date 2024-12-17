@@ -1,5 +1,87 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Get commission rule'
+openapi: GET 'https://api.premepay.com/v1/stores/:id/split_rules'
 ---
 
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/split_rules
+```
+
+### **Responses**
+
+* 200: OKThis is the answer for cases where your request is successful.
+
+
+```json
+  [
+    {
+      "id": 25529,
+      "recipient": {
+        "id": 346401,
+        "name": "Store Comissionada"
+      },
+      "type": "Fixed",
+      "disputeLiable": true,
+      "refundLiable": true,
+      "percentage": 0.00,
+      "fixed": 2.00
+    },
+    {
+      "id": 25530,
+      "recipient": {
+        "id": 346401,
+        "name": "Store Comissionada"
+      },
+      "type": "Percentage",
+      "disputeLiable": true,
+      "refundLiable": true,
+      "percentage": 2.00,
+      "fixed": 0.00
+    },
+    {
+      "id": 25531,
+      "recipient": {
+        "id": 346401,
+        "name": "Store Comissionada"
+      },
+      "type": "Both",
+      "disputeLiable": true,
+      "refundLiable": true,
+      "percentage": 2.00,
+      "fixed": 1.00
+    }
+  ]
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  ```json
+
+  {
+    "status": 401
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+
+```json
+  {
+    "status": 403
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+
+```json
+  {
+    "status": 500,
+    "detail": "Error details"
+  }
+  ```
+
+***

@@ -17,309 +17,286 @@ Keeping your customers' data up-to-date is essential for the smooth operational 
 
 ### **List of Parameters**
 
-| Parameters | Type | Description | Required |
-| --- | --- | --- | --- |
-| `firstName` | string | First name or Corporate name | Yes |
-| `surname` | string | Surname | No |
-| `identificationNumber` | string | CPF or CNPJ | No |
-| `birthdate` | date | Birth date | No |
-| `email` | string | Email | Yes |
-| `phone` | string | Telefone | No |
-| `address` | object | Addresss | No |
-| s`treet` | string | Street | No |
-| `number` | string | Number | No |
-| `reference` | string | Reference | No |
-| `district` | string | District | No |
-| `city` | string | City | No |
-| `state` | int | State | No |
-| `country` | int | Country | No |
-| `zipcode` | string | Zip code | No |
+| Parameters             | Type   | Description                  | Required |
+| ---------------------- | ------ | ---------------------------- | -------- |
+| `firstName`            | string | First name or Corporate name | Yes      |
+| `surname`              | string | Surname                      | No       |
+| `identificationNumber` | string | CPF or CNPJ                  | No       |
+| `birthdate`            | date   | Birth date                   | No       |
+| `email`                | string | Email                        | Yes      |
+| `phone`                | string | Telefone                     | No       |
+| `address`              | object | Addresss                     | No       |
+| s`treet`               | string | Street                       | No       |
+| `number`               | string | Number                       | No       |
+| `reference`            | string | Reference                    | No       |
+| `district`             | string | District                     | No       |
+| `city`                 | string | City                         | No       |
+| `state`                | int    | State                        | No       |
+| `country`              | int    | Country                      | No       |
+| `zipcode`              | string | Zip code                     | No       |
 
 The code or ID of the States is directly related to their position in the list below, starting from 0 (zero). For example, the abbreviation AC has the code: 0, and the abbreviation CE has the code 5.
 
-- **List of Brazilian States**
-    
-    ```json
-    				AC,
-            AL,
-            AP,
-            AM,
-            BA,
-            CE,
-            DF,
-            ES,
-            GO,
-            MA,
-            MT,
-            MS,
-            MG,
-            PA,
-            PB,
-            PR,
-            PE,
-            PI,
-            RJ,
-            RN,
-            RS,
-            RO,
-            RR,
-            SC,
-            SP,
-            SE,
-            TO
-    ```
-    
+* **List of Brazilian States**```json
+  				AC,
+          AL,
+          AP,
+          AM,
+          BA,
+          CE,
+          DF,
+          ES,
+          GO,
+          MA,
+          MT,
+          MS,
+          MG,
+          PA,
+          PB,
+          PR,
+          PE,
+          PI,
+          RJ,
+          RN,
+          RS,
+          RO,
+          RR,
+          SC,
+          SP,
+          SE,
+          TO
+  ```
 
 The same applies to Countries, where BR has the code 0 (zero), and MX has the code 5:
 
-- **List of Countries**
-    
-    ```json
-    				BR,
-            US,
-            VE,
-            HT,
-            CR,
-            MX,
-            CL,
-            DO,
-            PA,
-            CO,
-            EC,
-            HN,
-            PR,
-            AR,
-            GT,
-            PY,
-            UY,
-            CA,
-            CU,
-            NI,
-            TT,
-            PE,
-            BO,
-            SV,
-            GY,
-            SR,
-            BS,
-            BZ,
-            VG,
-            DM,
-            BM,
-            KY,
-            RU,
-            TR,
-            DE,
-            FR,
-            UK,
-            IT,
-            ES,
-            UA,
-            PL,
-            RO,
-            KZ,
-            NL,
-            BE,
-            GR,
-            CZ,
-            SE,
-            PT,
-            AZ,
-            HU,
-            AT,
-            CH,
-            BG,
-            RS,
-            DK,
-            FI,
-            SK,
-            NO,
-            IE,
-            HR,
-            GE,
-            AL,
-            LT,
-            SI,
-            LV,
-            EE,
-            CY,
-            LU,
-            MT,
-            IS,
-            JE,
-            IM,
-            AD,
-            G,
-            MC,
-            LI,
-            SM,
-            NG,
-            EG,
-            ZA,
-            TZ,
-            UG,
-            MA,
-            MZ,
-            GH,
-            AO,
-            TN,
-            GN,
-            SL,
-            LR,
-            MU,
-            SC,
-            CN,
-            HK,
-            TW,
-            IN,
-            ID,
-            IQ,
-            IL,
-            JP,
-            JO,
-            KW,
-            LB,
-            MO,
-            MY,
-            MV,
-            PK,
-            PH,
-            QA,
-            SA,
-            SG,
-            KR,
-            LK,
-            TH,
-            TP,
-            AE,
-            VN,
-            WS,
-            AU,
-            NZ,
-            PF,
-            AS,
-            MH
-    ```
-    
+* **List of Countries**```json
+  				BR,
+          US,
+          VE,
+          HT,
+          CR,
+          MX,
+          CL,
+          DO,
+          PA,
+          CO,
+          EC,
+          HN,
+          PR,
+          AR,
+          GT,
+          PY,
+          UY,
+          CA,
+          CU,
+          NI,
+          TT,
+          PE,
+          BO,
+          SV,
+          GY,
+          SR,
+          BS,
+          BZ,
+          VG,
+          DM,
+          BM,
+          KY,
+          RU,
+          TR,
+          DE,
+          FR,
+          UK,
+          IT,
+          ES,
+          UA,
+          PL,
+          RO,
+          KZ,
+          NL,
+          BE,
+          GR,
+          CZ,
+          SE,
+          PT,
+          AZ,
+          HU,
+          AT,
+          CH,
+          BG,
+          RS,
+          DK,
+          FI,
+          SK,
+          NO,
+          IE,
+          HR,
+          GE,
+          AL,
+          LT,
+          SI,
+          LV,
+          EE,
+          CY,
+          LU,
+          MT,
+          IS,
+          JE,
+          IM,
+          AD,
+          G,
+          MC,
+          LI,
+          SM,
+          NG,
+          EG,
+          ZA,
+          TZ,
+          UG,
+          MA,
+          MZ,
+          GH,
+          AO,
+          TN,
+          GN,
+          SL,
+          LR,
+          MU,
+          SC,
+          CN,
+          HK,
+          TW,
+          IN,
+          ID,
+          IQ,
+          IL,
+          JP,
+          JO,
+          KW,
+          LB,
+          MO,
+          MY,
+          MV,
+          PK,
+          PH,
+          QA,
+          SA,
+          SG,
+          KR,
+          LK,
+          TH,
+          TP,
+          AE,
+          VN,
+          WS,
+          AU,
+          NZ,
+          PF,
+          AS,
+          MH
+  ```
 
 ### Request example
 
 This is an example of how your request to edit the data of a Consumer should look like:
 
-- Body
-    
-    ```json
-    {
-      "firstName": "Felipe Gabriel",
-      "surname": "Souza",
-      "identificationNumber": "71891797808",
-      "birthdate": "1968-08-08",
-      "email": "user@example.com",
-      "phone": "(17) 2765-2965",
-      "address": {
-        "street": "Rua Capitão Alcides Leôncio Junqueira Franco",
-        "number": "780",
-        "zipcode": "14711304",
-        "reference": null,
-        "district": "Distrito Industrial II",
-        "city": "Bebedouro",
-        "state": 24,
-        "country": 0
-      }
+* Body```json
+  {
+    "firstName": "Felipe Gabriel",
+    "surname": "Souza",
+    "identificationNumber": "71891797808",
+    "birthdate": "1968-08-08",
+    "email": "user@example.com",
+    "phone": "(17) 2765-2965",
+    "address": {
+      "street": "Rua Capitão Alcides Leôncio Junqueira Franco",
+      "number": "780",
+      "zipcode": "14711304",
+      "reference": null,
+      "district": "Distrito Industrial II",
+      "city": "Bebedouro",
+      "state": 24,
+      "country": 0
     }
-    ```
-    
+  }
+  ```
 
 ### **Responses**
 
 If your request is successful, you will receive the consumer object as the response.
 
-- 200: OK
-    
-    ```json
-    {
-        "id": 14953,
-        "storeId": 359,
-        "firstName": "Luana Elaine",
-        "surname": "Dias",
-        "identificationNumber": "10019073615",
-        "cpf": "10019073615",
-        "birthdate": "1968-08-08T00:00:00",
-        "email": "luana.elaine.dias@email.com",
-        "phone": "(17) 2765-2965",
-        "address": {
-            "street": "Rua Rio de Janeiro",
-            "number": "702",
-            "zipCode": "77060160",
-            "reference": null,
-            "district": "Jardim Aureny I (Taquaralto)",
-            "city": "Palmas",
-            "state": 26,
-            "country": 0
-        }
-    }
-    ```
-    
+* 200: OK```json
+  {
+      "id": 14953,
+      "storeId": 359,
+      "firstName": "Luana Elaine",
+      "surname": "Dias",
+      "identificationNumber": "10019073615",
+      "cpf": "10019073615",
+      "birthdate": "1968-08-08T00:00:00",
+      "email": "luana.elaine.dias@email.com",
+      "phone": "(17) 2765-2965",
+      "address": {
+          "street": "Rua Rio de Janeiro",
+          "number": "702",
+          "zipCode": "77060160",
+          "reference": null,
+          "district": "Jardim Aureny I (Taquaralto)",
+          "city": "Palmas",
+          "state": 26,
+          "country": 0
+      }
+  }
+  ```
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
-- 400: Bad Request
-    
-    ```json
-    {
-        "errors": {
-            "FirstName": [
-                "The FirstName field is required."
-            ]
-        },
-        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-        "title": "One or more validation errors occurred.",
-        "status": 400,
-        "traceId": "|75031f76-47c1fe46efb71345."
-    }
-    ```
-    
-- 401: Unauthorized
-    
-    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
-    
-    ```json
-    {
-      "type": "https://httpstatuses.com/401",
-      "title": "Unauthorized",
-      "status": 401,
-      "detail": null,
-      "instance": null,
-      "extensions": {}
-    }
-    ```
-    
-- 403: Forbidden
-    
-    ```json
-    {
-      "type": "https://httpstatuses.com/403",
-      "title": "Forbidden",
-      "status": 403,
-      "detail": null,
-      "instance": null,
-      "extensions": {}
-    }
-    ```
-    
-- 500: Internal Server Error
-    
-    ```json
-    {
-        "type": "https://httpstatuses.com/500",
-        "title": "Internal Server Error",
-        "status": 500,
-        "detail": null,
-        "instance": null,
-        "extensions": {}
-    }
-    ```
-    
+* 400: Bad Request```json
+  {
+      "errors": {
+          "FirstName": [
+              "The FirstName field is required."
+          ]
+      },
+      "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+      "title": "One or more validation errors occurred.",
+      "status": 400,
+      "traceId": "|75031f76-47c1fe46efb71345."
+  }
+  ```
 
----
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: Forbidden```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 500: Internal Server Error```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***

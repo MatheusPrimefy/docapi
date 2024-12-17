@@ -116,11 +116,11 @@
       ]
     },
      {
-      "group": "Products",
+      "group": "Payment Split",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/PaymentSplit/details",
+        "api-reference/PaymentSplit/create",
+        "api-reference/PaymentSplit/delete"
       ]
     },
      {

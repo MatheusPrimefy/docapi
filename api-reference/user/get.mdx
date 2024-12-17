@@ -1,5 +1,94 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Get user'
+openapi: GET `https://api.premepay.com/v1/stores/:id/users`
 ---
 
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/users
+```
+
+* Would you like to view all the users of a Business?
+ Use the endpoint:
+ ```json
+https://api.premepay.com/v1/business/:id/users
+```
+
+
+### **Responses**
+
+- 200: OK
+    
+    ```json
+    [
+    	{
+    		"id": 1291,
+    		"name": "Rayssa Eliane Daniela Assis",
+    		"username": "rayssa-assis72@hotmai.com",
+    		"password": "ly9fD3tZXH",
+    		"language": "pt-br",
+    		"confirmPassword": null,
+    		"countCaracteres": 0,
+    		"isAdmin": false,
+    		"permission": {
+    			"id": 1109,
+    			"userId": 1291,
+    			"user": null,
+    			"entityId": 110,
+    			"entityType": "Business",
+    			"role": 0
+    		}
+    	},
+    	{
+    		"id": 1434,
+    		"name": "Davi Emanuel Sérgio Campos",
+    		"username": "daviemanuelcampos@uou.com.br",
+    		"password": "0kpwnzQqRu",
+    		"language": null,
+    		"confirmPassword": null,
+    		"countCaracteres": 0,
+    		"isAdmin": false,
+    		"permission": {
+    			"id": 1251,
+    			"userId": 1434,
+    			"user": null,
+    			"entityId": 359,
+    			"entityType": "Store",
+    			"role": 0
+    		}
+    	}
+    ]
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+
+---

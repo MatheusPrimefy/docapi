@@ -58,17 +58,17 @@ This is an example of how your authentication request should look like.
     "boletoInstallments": 1,
     "chargeDaysBefore": 1
    
-  ```
+```
 
 **Responses**
 
 This is the response for cases where your request is successful.
 
-* 200: OK```json
+* 200: OK 
+```json
   ```
 
 * 400: Bad RequestThis is the response for cases where the server does not process the request due to an error encountered. Some examples that may result in this error are an incorrectly typed URL, malformed syntax, or invalid routing request.
-
 
 ```json
   {
@@ -77,11 +77,11 @@ This is the response for cases where your request is successful.
     "status": 400,
     "detail": null,
   }
-  ```
+```
 
-* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+* 401: Unauthorized
+This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
   If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
-  
   
   ```json
   {

@@ -1,0 +1,99 @@
+---
+title: 'Edit user'
+description: 'Description of your new file.'
+---
+
+## **PUT Edit user**
+
+[`https://api.premepay.com/v1/stores/:id/users/:id`](https://api.premepay.com/v1/stores/:id/users/:id)
+
+* Would you like to modify a Business type user?Use the endpoint [`https://api.premepay.com/v1/business/:id/users/:id`](https://api.premepay.com/v1/business/:id/users/:id)
+
+### List of Parameters
+
+| **Parameter** | Type   | Description       | Required |
+| ------------- | ------ | ----------------- | -------- |
+| `name`        | string | Nome              | Yes      |
+| `username`    | email  | Email             | Yes      |
+| `password`    | string | Password          | Yes      |
+| `permission`  | object | Permission        | No       |
+| `entityId`    | int    | Identifier        | Yes      |
+| `entityType`  | string | Store or Business | Yes      |
+| `role`        | int    | Permission level  | Yes      |
+
+> **Role:** is related to the user's access level and accepts the following integer values:
+
+> **EntityId:** is the ID of the Store or Business where the user will have access.
+
+| Role | Permission level |
+| ---- | ---------------- |
+| 0    | Owner            |
+| 1    | Administrator    |
+| 2    | Agent            |
+| 3    | ViewOnly         |
+| 4    | API              |
+
+### Example of a request for updating a Store type user
+
+This is an example of how your request should look like for updating a Store type user.
+
+* Body
+
+```json
+  {
+  	"name":"Natalia Souza",
+  	"username":"natalia.clara.souza@alemponte.com.br",
+  	"password":"70jSGgH7eL",
+  	"permission":{
+  		"entityId": 1,
+  		"entityType":"Store",
+  		"role": 0
+  	}
+  }
+```
+
+### **Responses**
+
+* 200: OK
+
+```json
+  {
+  	"id": 434,
+  	"name": "Natalia Souza",
+  	"username": "natalia.clara.souza@alemponte.com.br",
+  	"permission": {
+  		"entityId": 110,
+  		"entityType": "Business",
+  		"role": 0
+  	}
+  }
+```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.
+
+````json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }

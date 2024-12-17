@@ -87,7 +87,7 @@
       "group": "Users",
       "pages": [
         "api-reference/user/get",
-        "api-reference/user/create",
+        "api-reference/user/edit",
         "api-reference/endpoint/delete"
       ]
     },

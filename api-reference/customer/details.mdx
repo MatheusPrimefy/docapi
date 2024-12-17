@@ -13,7 +13,9 @@ Through the mentioned route above, it is possible to list even more details of a
 
 ### Responses
 
-* 200: Ok```json
+* 200: Ok
+
+```json
   {
       "customer": {
           "id": 14789,
@@ -99,7 +101,10 @@ Through the mentioned route above, it is possible to list even more details of a
   ```
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  
+  ```json
   {
     "type": "https://httpstatuses.com/401",
     "title": "Unauthorized",
@@ -110,7 +115,10 @@ Through the mentioned route above, it is possible to list even more details of a
   }
   ```
 
-* 403: Forbidden```jsx
+* 403: Forbidden
+
+
+```json
   {
     "type": "https://httpstatuses.com/403",
     "title": "Forbidden",

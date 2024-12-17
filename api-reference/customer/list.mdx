@@ -1,5 +1,62 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "List customers"
+openapi: "GET https://api.premepay.com/v1/stores/:id/customers/list"
 ---
 
+Through the mentioned route above, you will receive a list of all your registered consumers. This is a view-only list, and it is sorted by the creation date, with the most recent customers appearing first.
+
+Below are the possible responses from the Primefy API for this request.
+
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/customers/list
+```
+
+Would you like to list a Business type customer?”
+Use the endpoint:
+
+```json
+https://api.premepay.com/v1/business/:id/customers/list
+```
+
+
+Through the mentioned route above, it is possible to list customer data from a Store such as Name, Email, Total Spent, Number of Sales, and Last Payment Date.
+
+### **Responses**
+
+If your request is successful, you will receive a list with the data as highlighted above.
+
+- 200: OK
+    
+    ```json
+    [
+    	{
+    		"customer": "Jonatan Falconer",
+    		"createdOn": "2021-11-27T17:40:03",
+    		"email": "test@test.com",
+    		"totalSpent": 217.13,
+    		"sales": 1,
+    		"lastPayment": "2021-11-27T17:40:03"
+    	},
+    	{
+    		"customer": "Heitor  Yuri Leonardo da Cruz",
+    		"createdOn": "2021-07-08T18:15:25",
+    		"email": "hheitoryurileonardodacruz@royalplas.com.br",
+    		"totalSpent": 100.00,
+    		"sales": 1,
+    		"lastPayment": "2021-10-15T14:18:41"
+    	},
+    	{
+    		"customer": "Kaique  Julio Baptista",
+    		"createdOn": "2021-07-26T13:29:29",
+    		"email": "kkaiquejuliobaptista@ci.com.br",
+    		"totalSpent": 1.93,
+    		"sales": 1,
+    		"lastPayment": "2021-07-26T13:29:29"
+    	}
+    ]
+    ```
+    
+
+---

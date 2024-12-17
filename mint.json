@@ -88,7 +88,7 @@
       "pages": [
         "api-reference/user/create",
         "api-reference/user/edit",
-        "api-reference/endpoint/get"
+        "api-reference/user/get"
       ]
     },
      {

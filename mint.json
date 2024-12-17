@@ -94,9 +94,10 @@
      {
       "group": "Customers",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/customer/create",
+        "api-reference/customer/details",
+        "api-reference/customer/edit",
+        "api-reference/customer/list"
       ]
     },
      {

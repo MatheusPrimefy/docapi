@@ -101,7 +101,7 @@
       ]
     },
      {
-      "group": "cards",
+      "group": "Cards",
       "pages": [
         "api-reference/cards/create",
         "api-reference/endpoint/delete",

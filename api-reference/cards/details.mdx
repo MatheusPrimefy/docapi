@@ -1,5 +1,5 @@
 ---
-title: "card details "
+title: "Card details "
 openapi: "GET https://api.premepay.com/v1/stores/:id/customers/:id/cards/:id"
 ---
 
@@ -15,76 +15,59 @@ You can view the card details of a consumer by using the mentioned route above. 
 
 If your request is successful, you will receive the card object as the response.
 
-- 200: OK
-    
-    ```json
-    {
-      "id": 28378,
-      "cardBrand": "Mastercard",
-      "holderName": "Felipe Souza",
-      "expirationMonth": 2,
-      "expirationYear": 2022,
-      "firstDigits": "5201",
-      "lastDigits": "4014"
-    }
-    ```
-    
-- 401: Unauthorized
-    
-    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
-    
-    ```json
-    {
-      "type": "https://httpstatuses.com/401",
-      "title": "Unauthorized",
-      "status": 401,
-      "detail": null,
-      "instance": null,
-      "extensions": {}
-    }
-    ```
-    
-- 403: Forbidden
-    
-    ```json
-    {
-      "type": "https://httpstatuses.com/403",
-      "title": "Forbidden",
-      "status": 403,
-      "detail": null,
-      "instance": null,
-      "extensions": {}
-    }
-    ```
-    
-- 404: Not Found
-    
-    This is the response for cases where either the card ID or the customer ID was not found.
-    
-    ```json
-    {
-    	"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-    	"title": "Not Found",
-    	"status": 404,
-    	"traceId": "|7500ccd2-47c1fe46efb71345."
-    }
-    ```
-    
-- 500: Internal Server Error
-    
-    This error is returned when unhandled data is encountered, such as sending a string in a numeric field or attempting to associate the card with a non-existent consumer.
-    
-    ```json
-    {
-    	"type": "https://httpstatuses.com/500",
-    	"title": "Internal Server Error",
-    	"status": 500,
-    	"detail": null,
-    	"instance": null,
-    	"extensions": {}
-    }
-    ```
-    
+* 200: OK```json
+  {
+    "id": 28378,
+    "cardBrand": "Mastercard",
+    "holderName": "Felipe Souza",
+    "expirationMonth": 2,
+    "expirationYear": 2022,
+    "firstDigits": "5201",
+    "lastDigits": "4014"
+  }
+  ```
 
----
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: Forbidden```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 404: Not FoundThis is the response for cases where either the card ID or the customer ID was not found.```json
+  {
+  	"type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+  	"title": "Not Found",
+  	"status": 404,
+  	"traceId": "|7500ccd2-47c1fe46efb71345."
+  }
+  ```
+
+* 500: Internal Server ErrorThis error is returned when unhandled data is encountered, such as sending a string in a numeric field or attempting to associate the card with a non-existent consumer.```json
+  {
+  	"type": "https://httpstatuses.com/500",
+  	"title": "Internal Server Error",
+  	"status": 500,
+  	"detail": null,
+  	"instance": null,
+  	"extensions": {}
+  }
+  ```
+
+***

@@ -1,7 +1,11 @@
 ---
 title: 'Add user'
-api: POST 'https://api.premepay.com/v1/users'
+openapi: POST 'https://api.premepay.com/v1/users'
 ---
+
+## **POST Add user**
+
+`https://api.premepay.com/v1/users`
 
 Follow the route above to make a request and add a new user to use the API. You will need to send the request containing some mandatory fields. Below, you can view our List of Field Descriptions for Adding User.
 
@@ -75,6 +79,7 @@ If your request has invalid creation parameters - for example, specifying an inv
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
   If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
   ```json
   {
     "type": "https://httpstatuses.com/401",
@@ -140,8 +145,9 @@ If your request is successful, you will receive the user object as the response.
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
 * 401: Unauthorized
-This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
   If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
   
   ```json
   {

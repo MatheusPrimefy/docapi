@@ -1,5 +1,54 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Delete commission rule'
+openapi: DELETE 'https://api.premepay.com/v1/stores/:id/split_rules'
 ---
 
+* Request type: **\[DELETE]**
+
+```json
+https://api.premepay.com/v1/stores/:id/split_rules/:id
+```
+
+<aside>
+  ⚠️ **Attention:** This action is irreversible.
+</aside>
+
+### **Responses**
+
+* 200: OK
+This is the answer for cases where your request is successful.
+
+```json
+  {
+      "message": "Split Rule :id successfully deleted"
+  }
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  ```json
+
+  {
+    "status": 401
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+    "status": 403
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+```json
+  {
+    "status": 500,
+    "detail": "Error details"
+  }
+  ```
+
+***

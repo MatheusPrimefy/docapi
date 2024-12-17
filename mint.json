@@ -101,11 +101,11 @@
       ]
     },
      {
-      "group": "Payment links",
+      "group": "cards",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/cards/create",
+        "api-reference/endpoint/delete",
+        "api-reference/endpoint/details"
       ]
     },
      {

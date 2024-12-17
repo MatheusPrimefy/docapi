@@ -1,5 +1,157 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Add card"
+openapi: "POST https://api.premepay.com/v1/stores/:id/customers/:id/cards "
 ---
 
+* Request type: **\[POST]**
+
+```json
+https://api.premepay.com/v1/stores/:id/customers/:id/cards
+```
+
+Follow the route to make the request and add a card for your consumer. You will need to send the request containing some mandatory fields. Below, you can view our List of Field Descriptions for Adding a Card.
+
+### List of Parameters
+
+| Parameter         | Type    | Description      | Required |
+| ----------------- | ------- | ---------------- | -------- |
+| `holderName`      | string  | Holder name      | Yes      |
+| `expirationMonth` | integer | Expiration month | Yes      |
+| `expirationYear`  | integer | Expiration year  | Yes      |
+| `cardNumber`      | number  | Card number      | Yes      |
+| `securityCode`    | string  | Security code    | Yes      |
+
+<aside>
+  ⚠️ **Attention:** Only Primefy customers who have PCI Compliance certification can store sensitive payment data of consumers.
+</aside>
+
+### Request example
+
+This is an example of how your request to register a new card should look like.
+
+* Body
+
+```json
+  {
+    "holderName": "Felipe Souza",
+    "expirationMonth": 2,
+    "expirationYear": 2022,
+    "cardNumber": "5201561050024014",
+    "securityCode": "339"
+  }
+  ```
+
+### **Responses**
+
+If your request is successful, you will receive the consumer object as the response.
+
+* 200: OK
+
+This is the response for cases where your request is successful.
+
+```json
+  {
+    "id": 28378,
+    "cardBrand": "Mastercard",
+    "holderName": "Felipe Souza",
+    "expirationMonth": 2,
+    "expirationYear": 2022,
+    "firstDigits": "5201",
+    "lastDigits": "4014"
+  }
+  ```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 400: Bad RequestThis is the response for cases where the server does not process the request due to an error found in sending the information. Some examples that may result in this error are an incorrectly typed URL, malformed syntax, invalid routing request, or incorrectly provided data.Example 1: Card with invalid number
+
+
+```json
+  {
+  	"errors": {
+  		"CardNumber": [
+  			"The CardNumber field is not a valid credit card number."
+  		]
+  	},
+  	"type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  	"title": "One or more validation errors occurred.",
+  	"status": 400,
+  	"traceId": "|7500cc25-47c1fe46efb71345."
+  }
+  ```
+  Example 2: Expiration month less than 1 or greater than 12
+  
+  ```json
+  {
+  	"errors": {
+  		"ExpirationMonth": [
+  			"The field ExpirationMonth must be between 1 and 12."
+  		]
+  	},
+  	"type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  	"title": "One or more validation errors occurred.",
+  	"status": 400,
+  	"traceId": "|7500cc31-47c1fe46efb71345."
+  }
+  ```
+  Example 3: Expiration year less than 2000 or greater than 3000
+  
+  ```json
+  {
+  	"errors": {
+  		"ExpirationYear": [
+  			"The field ExpirationYear must be between 2000 and 3000."
+  		]
+  	},
+  	"type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+  	"title": "One or more validation errors occurred.",
+  	"status": 400,
+  	"traceId": "|7500cc3e-47c1fe46efb71345."
+  }
+  ```
+
+* 401: Unauthorized
+This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: ForbbidenThis is the response for cases where the request was forbidden. It occurs when the server can understand the request but refuses to authorize the issuance of an approval response.
+
+
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbiden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis error is returned when an unhandled data is encountered, such as sending a string in a numeric field or trying to associate the card with a non-existent consumer.
+
+
+```json
+  {
+  	"type": "https://httpstatuses.com/500",
+  	"title": "Internal Server Error",
+  	"status": 500,
+  	"detail": null,
+  	"instance": null,
+  	"extensions": {}
+  }
+  ```
+
+***

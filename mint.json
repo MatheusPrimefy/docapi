@@ -104,8 +104,8 @@
       "group": "Cards",
       "pages": [
         "api-reference/cards/create",
-        "api-reference/endpoint/delete",
-        "api-reference/endpoint/details"
+        "api-reference/cards/delete",
+        "api-reference/cards/details"
       ]
     },
      {

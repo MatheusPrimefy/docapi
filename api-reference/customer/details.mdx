@@ -1,5 +1,134 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "List customer details"
+openapi: "https://api.premepay.com/v1/stores/:id/customers/:identification-number"
 ---
 
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/customers/:identification-number
+```
+
+
+Through the mentioned route above, it is possible to list even more details of a consumer, using their CPF. The response will provide information ranging from registration details to sales, subscriptions, refunds, etc.
+
+### Responses
+
+- 200: Ok
+    
+    ```json
+    {
+        "customer": {
+            "id": 14789,
+            "firstName": "Diego Felipe",
+            "surname": "dos Santos",
+    				"identificationNumber": "51149496320",
+            "birthdate": "1996-04-14T00:00:00",
+            "email": "diegofelipedossantos-91@marmorariauchoa.com",
+            "phone": "(63) 59595-9485",
+            "address": null,
+            "createdOn": "2022-06-05T15:23:28"
+        },
+        "spent": {
+            "total": 570.00
+        },
+        "subscriptions": [
+            {
+                "id": 112007,
+                "status": "Active",
+                "name": "Este plano possui 1 Produto",
+                "frequency": "Monthly",
+                "lastPayment": "2022-07-29T09:40:55",
+                "nextPayment": "2022-08-29T09:41:05"
+            }
+        ],
+        "orders": [
+            {
+                "id": 192480,
+                "status": "Canceled",
+                "number": "P151807"
+            },
+            {
+                "id": 192460,
+                "status": "Succeded",
+                "number": "P213080"
+            },
+            {
+                "id": 192169,
+                "status": "Succeded",
+                "number": "P662440"
+            },
+            {
+                "id": 192164,
+                "status": "Succeded",
+                "number": "P643719"
+            },
+            {
+                "id": 192161,
+                "status": "Succeded",
+                "number": "P832924"
+            },
+            {
+                "id": 192158,
+                "status": "Succeded",
+                "number": "P212358"
+            }
+        ],
+        "cards": [
+            {
+                "id": 30349,
+                "cardBrand": "Visa",
+                "holderName": "Felipe Souza",
+                "expirationMonth": 2,
+                "expirationYear": 2024,
+                "firstDigits": "4539",
+                "lastDigits": "5497",
+                "isDefault": false
+            }
+        ],
+        "disputes": {
+            "total": 1,
+            "details": [
+                {
+                    "id": 347,
+                    "amount": 10.00,
+                    "createdOn": "2022-08-10T01:22:14",
+                    "endedOn": "2022-08-11T01:22:14",
+                    "status": "ChargedBack"
+                }
+            ]
+        }
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    ```jsx
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+
+---

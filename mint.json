@@ -109,11 +109,10 @@
       ]
     },
      {
-      "group": "Payment Split",
+      "group": "Payment links",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/Paymentlinks/create",
+        "api-reference/Paymentlinks/delete"
       ]
     },
      {

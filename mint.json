@@ -60,7 +60,7 @@
     {
       "group": "Essentials",
       "pages": [
-        "essentials/markdown",
+        "api-reference/Authentication",
         "essentials/code",
         "essentials/images",
         "essentials/settings",

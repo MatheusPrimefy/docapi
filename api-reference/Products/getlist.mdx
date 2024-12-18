@@ -1,10 +1,147 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Get product list'
+openapi: GET 'https://api.premepay.com/v1/stores/:id/products/'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[GET]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/products/
 ```
+
+- Would you like to get product list by Business?
+    ```json
+    Use the endpoint `https://api.premepay.com/v1/businesses/:id**/**products/`
+    ```
+
+### **Responses**
+
+- 200: OK
+    
+    ```json
+    [
+    	 {
+            "id": 19,
+            "store": {
+                "id": 359,
+                "businessId": 110,
+                "identificationNumber": "46389383000566",
+                "companyName": "BDF LTDA",
+                "tradingName": null,
+                "logoPath": "https://{safe-url}/logotipos/a4d16d65-71e4-4514-b9e7-067fbdadd051.png",
+                "name": "Ontop",
+                "socialName": "Ontop",
+                "email": "suporte@ontop.com",
+                "phone": "(45) 34534-5345",
+                "address": null,
+                "documents": [],
+                "fxMerchant": null,
+                "generateInvoice": false
+            },
+            "name": "name",
+            "description": "description",
+            "unitPrice": 100.00,
+            "currency": "BRL",
+            "shippable": true,
+            "unitLabel": "unit label",
+            "status": "Disabled",
+            "metadata": {
+                "item1": "item 1",
+                "item2": "item 2"
+            },
+            "url": "www.url.com",
+            "createdOn": "2022-05-02T17:44:59",
+            "updatedOn": "2022-05-02T17:44:59",
+            "packageDimension": {
+                "height": 1.00,
+                "length": 2.00,
+                "weight": 3.00,
+                "width": 4.00
+            },
+            "images": [
+                {
+                    "id": 35,
+                    "filePath": "https://preme.s3.us-east-2.amazonaws.com/produtos/359/1-87aefcde-230a-4a67-b0a3-67ee228b815c.png",
+                    "description": "image converted"
+                },
+                {
+                    "id": 36,
+                    "filePath": "https://preme.s3.us-east-2.amazonaws.com/produtos/359/2-cd687fd7-3d8c-4f09-9c73-54524ce95ee4.png",
+                    "description": "image converted"
+                },
+                {
+                    "id": 37,
+                    "filePath": "https://preme.s3.us-east-2.amazonaws.com/produtos/359/3-de0a7933-5c74-421f-ba34-00eff0592c6a.png",
+                    "description": "image converted"
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "store": {
+                "id": 359,
+                "businessId": 110,
+                "identificationNumber": "46389383000566",
+                "companyName": "BDF LTDA",
+                "tradingName": null,
+                "logoPath": "https://{safe-url}/logotipos/a4d16d65-71e4-4514-b9e7-067fbdadd051.png",
+                "name": "Ontop",
+                "socialName": "Ontop",
+                "email": "suporte@ontop.com",
+                "phone": "(45) 34534-5345",
+                "address": null,
+                "documents": [],
+                "fxMerchant": null,
+                "generateInvoice": false
+            },
+            "name": "name",
+            "description": "description",
+            "unitPrice": 100.00,
+            "currency": "BRL",
+            "shippable": true,
+            "unitLabel": "unit label",
+            "status": "Active",
+            "metadata": {
+                "item1": "item 1",
+                "item2": "item 2"
+            },
+            "url": "www.url.com",
+            "createdOn": "2022-05-03T08:59:28",
+            "updatedOn": "2022-05-03T08:59:28",
+            "packageDimension": null,
+            "images": []
+        }
+    ]
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+
+---

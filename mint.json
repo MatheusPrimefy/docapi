@@ -137,11 +137,13 @@
       ]
     },
      {
-      "group": "Sales",
+      "group": "Discount Coupon",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/DiscountCoupon/active",
+        "api-reference/DiscountCoupon/create",
+        "api-reference/DiscountCoupon/delete",
+        "api-reference/DiscountCoupon/details",
+        "api-reference/DiscountCoupon/list"
       ]
     },
      {

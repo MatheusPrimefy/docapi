@@ -1,0 +1,137 @@
+---
+title: 'Create discount coupon'
+openapi: POST 'https://api.premepay.com/v1/stores/:id/vouchers'
+---
+
+* Request type: **\[POST]**
+
+```json
+https://api.premepay.com/v1/stores/:id/vouchers
+```
+
+### Status for Discount Coupon
+
+| Parameter  | Meaning         |
+| ---------- | --------------- |
+| `Active`   | Active Coupon   |
+| `Inactive` | Inactive Coupon |
+
+### Applicable discount formats:
+
+| Parameter    | Meaning                                               |
+| ------------ | ----------------------------------------------------- |
+| `percentage` | Discount amount will be applied in the format         |
+| `fixed`      | Discount amount will be applied with the fixed amount |
+
+### Payment Methods that accept Discount Coupons
+
+| Parameter | Meaning                     |
+| --------- | --------------------------- |
+| `credit`  | Credit Card                 |
+| `boleto`  | Bank Slip (Boleto Bancário) |
+| `pix`     | Pix                         |
+
+### Request example
+
+This is an example of how your request to register a product should look like.
+
+* Body
+
+```json
+  {
+  	"code": "preme100",
+  	"mode": "percentage",
+  	"amount": 10,
+    "expirationDate": "2022-08-26",
+  	"paymentTypes": ["credit", "boleto", "pix"]
+  }
+  ```
+
+### **Responses**
+
+If your request is successful, you will receive the return of the Voucher object.
+
+* 200: OK
+
+```json
+  {
+      "id": 30,
+      "code": "PREME10",
+      "mode": "Percentage",
+      "amount": 10.0,
+      "expirationDate": "2022-08-26T00:00:00",
+      "paymentTypes": [
+          0,
+          1,
+          3
+      ],
+      "status": "Active",
+      "createdOn": "2022-08-25T10:41:02.966749Z"
+  }
+  ```
+
+* 400: Bad Request
+
+This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+
+
+```json
+  {
+      "errors": {
+          "Voucher": [
+              "Code already exists"
+          ]
+      },
+      "metadata": null,
+      "type": "https://httpstatuses.com/400",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "One or more errors ocurred",
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 401: Unauthorized
+
+This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***

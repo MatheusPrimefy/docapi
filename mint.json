@@ -139,11 +139,11 @@
      {
       "group": "Discount Coupon",
       "pages": [
-        "api-reference/DiscountCoupon/active",
-        "api-reference/DiscountCoupon/create",
-        "api-reference/DiscountCoupon/delete",
-        "api-reference/DiscountCoupon/details",
-        "api-reference/DiscountCoupon/list"
+        "api-reference/DiscountCoupons/active",
+        "api-reference/DiscountCoupons/create",
+        "api-reference/DiscountCoupons/delete",
+        "api-reference/DiscountCoupons/details",
+        "api-reference/DiscountCoupons/list"
       ]
     },
      {

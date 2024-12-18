@@ -1,10 +1,66 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Delete product image'
+openapi: DELETE 'https://api.premepay.com/v1/stores/:id/products/:id'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[DELETE]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/products/:id
 ```
+
+You have the possibility to delete images associated with the Products whenever you wish. This action only removes the image and does not change or remove the Product.
+
+>
+⚠️ **Attention:** This action is irreversible.
+
+
+
+### **Responses**
+
+- 204: No Content
+    
+    This is the answer for cases where your request is successful.
+    
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+    ```json
+    {
+        "message": "product not found"
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+     {
+      "error": {
+        "message": "Unauthorized"
+      } 
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+      "error": {
+        "message": "Forbidden"      
+      }
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+
+---

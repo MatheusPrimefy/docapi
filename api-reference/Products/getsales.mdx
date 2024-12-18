@@ -1,10 +1,85 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'List product sales'
+openapi: GET 'https://api.premepay.com/v1/stores/:id/products/:id/orders'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[GET]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/products/:id/orders
 ```
+
+With the Primefy API and the route above you can view the Payment Order number and the Consumer associated with it.
+
+### **Responses**
+
+* 200: Ok
+This is the answer for cases where your request is successful.
+
+```json
+  [
+  	{
+  		"number": "P736739",
+  		"customer": "Diego Felipe dos Santos",
+  		"createdAt": "2022-05-13T12:59:31",
+  		"status": "Succeded"
+  	},
+  	{
+  		"number": "P298520",
+  		"customer": "Antonio Nakamura",
+  		"createdAt": "2022-05-04T13:08:57",
+  		"status": "Succeded"
+  	},
+  	{
+  		"number": "P713248",
+  		"customer": "Diego Felipe dos Santos",
+  		"createdAt": "2022-05-04T12:56:42",
+  		"status": "Failed"
+  	}
+  ]
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  
+  ```json
+  {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+
+```json
+  {
+      "type": "https://httpstatuses.com/403",
+      "title": "Unauthorized",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***

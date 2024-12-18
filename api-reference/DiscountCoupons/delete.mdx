@@ -1,10 +1,85 @@
 ---
-title: 'Create discount coupon'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/vouchers'
+title: 'Delete coupon'
+openapi: DELETE 'https://api.premepay.com/stores/:id/vouchers/:id-ou-code'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[DELETE]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/vouchers
+https://api.premepay.com/stores/:id/vouchers/:id-ou-code
 ```
+
+
+You have the possibility to permanently delete a Discount Coupon, as long as it is not associated with a Payment Order. If it is associated, the status will change to Inactive and it will not be possible to locate or use this Discount Coupon in the future.
+
+>
+💡 Deleting a Coupon is permanent and cannot be reversed.
+
+
+
+### **Responses**
+
+- 204: No Content
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+    ```json
+    {
+        "errors": null,
+        "metadata": null,
+        "type": "https://httpstatuses.com/400",
+        "title": "Bad Request",
+        "status": 400,
+        "detail": "voucher not found",
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

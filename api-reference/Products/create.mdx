@@ -19,30 +19,29 @@ Follow the route to requisition and create a new product to use in your sales. I
 
 ### Request Example
 
-This is an example of how your request to register a product should look like.
+| Parameter          | Type                                   | Description                                                              | Required |
+| ------------------ | -------------------------------------- | ------------------------------------------------------------------------ | -------- |
+| `name`             | string                                 | Product name                                                             | Yes      |
+| `description`      | string                                 | Description                                                              | No       |
+| `unitPrice`        | decimal                                | Unit price                                                               | No       |
+| `currency`         | string                                 | Currency                                                                 | No       |
+| `shippable`        | boolean                                | If deliverable/physical                                                  | No       |
+| `unitLabel`        | string                                 | Label Description                                                        | No       |
+| `status`           | string                                 | Product Registration Status (Active, Disabled, Deleted)                  | No       |
+| `url`              | string                                 | Internet                                                                 | No       |
+| `metadata`         | dictionary (key, value)                | Used to save miscellaneous information in dictionary format (key, value) | No       |
+| `packageDimension` | object                                 |                                                                          | No       |
+| `height`           | decimal                                | Height                                                                   |          |
+| `length`           | decimal                                | Length                                                                   |          |
+| `weight`           | decimal                                | Weight                                                                   |          |
+| `width`            | decimal                                | Width                                                                    |          |
+| `images`           | array of objects                       |                                                                          |          |
+| `encodedFile`      | data:application/pdf;base64,base64code | File in base64 format                                                    | No       |
+| `description`      | string                                 | Brief description of the product image                                   | No       |
 
-| Parameter        | Type                          | Description                                                            | Required |
-|------------------|-------------------------------|------------------------------------------------------------------------|----------|
-| `name`           | string                        | Product name                                                           | Yes      |
-| `description`    | string                        | Description                                                            | No       |
-| `unitPrice`      | decimal                       | Unit price                                                            | No       |
-| `currency`       | string                        | Currency                                                              | No       |
-| `shippable`      | boolean                       | If deliverable/physical                                                | No       |
-| `unitLabel`      | string                        | Label Description                                                      | No       |
-| `status`         | string                        | Product Registration Status (Active, Disabled, Deleted)                 | No       |
-| `url`            | string                        | Internet                                                              | No       |
-| `metadata`       | dictionary<key, value>         | Used to save miscellaneous information in dictionary format <key, value> | No       |
-| `packageDimension`| object                        |                                                                        | No       |
-| `height`         | decimal                       | Height                                                                |          |
-| `length`         | decimal                       | Length                                                                |          |
-| `weight`         | decimal                       | Weight                                                                |          |
-| `width`          | decimal                       | Width                                                                 |          |
-| `images`         | array                 |                                                                        |          |
-| `encodedFile`    | data:application/pdf;base64,base64code | File in base64 format                                                 | No       |
-| `description`    | string                        | Brief description of the product image                                 | No       |
+* Body
 
-
-* Body```json
+```json
   {
   	"name": "Tennis Nike Air",
   	"description": "Tennis Feminino",
@@ -91,7 +90,10 @@ This is an example of how your request to register a product should look like.
 
 This is the answer for cases where your request is successful.
 
-* 200: OK```json
+* 200: OK
+
+
+```json
   {
       "id": 46,
       "store": {
@@ -162,7 +164,11 @@ This is the answer for cases where your request is successful.
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
-* 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.```json
+* 400: Bad Request
+This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+
+
+```json
   {
       "errors": {
           "Images": [
@@ -177,7 +183,10 @@ If your request has invalid creation parameters - for example, specifying an inv
   ```
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  
+  ```json
   {
     "type": "https://httpstatuses.com/401",
     "title": "Unauthorized",
@@ -188,7 +197,9 @@ If your request has invalid creation parameters - for example, specifying an inv
   }
   ```
 
-* 403: Forbidden```json
+* 403: Forbidden
+
+```json
   {
     "type": "https://httpstatuses.com/403",
     "title": "Forbidden",
@@ -199,7 +210,9 @@ If your request has invalid creation parameters - for example, specifying an inv
   }
   ```
 
-* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.```json
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+```json
   {
       "type": "https://httpstatuses.com/500",
       "title": "Internal Server Error",

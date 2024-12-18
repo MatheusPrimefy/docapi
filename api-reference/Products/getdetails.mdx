@@ -1,10 +1,117 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Get product details'
+openapi: GET 'https://api.premepay.com/v1/stores/:id/products/:id/images'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[GET]**
 
 ```json
 https://api.premepay.com/v1/stores/:id/products/:id/images
 ```
+
+* Would you like to get specific product by Business?Use the endpoint
+
+```json
+https://api.premepay.com/businesses/:id/products/:id
+```
+
+### **Responses**
+
+* 200: OK
+
+```json
+  {
+      "id": 17,
+      "store": {
+          "id": 359,
+          "businessId": 110,
+          "identificationNumber": "46389383000566",
+          "companyName": "BDF LTDA",
+          "tradingName": null,
+          "logoPath": "https://{safe-url}/logotipos/a4d16d65-71e4-4514-b9e7-067fbdadd051.png",
+          "name": "Ontop",
+          "socialName": "Ontop",
+          "email": "suporte@ontop.com",
+          "phone": "(45) 34534-5345",
+          "address": null,
+          "documents": [],
+          "fxMerchant": null,
+          "generateInvoice": false
+      },
+      "name": "name",
+      "description": "description",
+      "unitPrice": 100.00,
+      "currency": "BRL",
+      "shippable": true,
+      "unitLabel": "unit label",
+      "status": "Active",
+      "metadata": {
+          "item1": "item 1",
+          "item2": "item 2"
+      },
+      "url": "www.url.com",
+      "createdOn": "2022-05-02T17:36:35",
+      "updatedOn": "2022-05-02T17:36:35",
+      "packageDimension": {
+          "height": 1.00,
+          "length": 2.00,
+          "weight": 3.00,
+          "width": 4.00
+      },
+      "images": [
+          {
+              "id": 29,
+              "filePath": "https://{safe-url}/produtos/359/1-b05df478-2065-4c44-a42f-fecd3e85609f.png",
+              "description": "image description"
+          },
+          {
+              "id": 30,
+              "filePath": "https://{safe-url}/produtos/359/2-73794727-c296-4ab7-96b9-a20c91d37376.png",
+              "description": "image description"
+          },
+          {
+              "id": 31,
+              "filePath": "https://{safe-url}/produtos/359/3-cc215c0b-9239-4568-a03c-4209c41254e9.png",
+              "description": "image description"
+          }
+      ]
+  }
+```
+
+* 400: Bad RequestThis is the answer that in case of Product not found
+
+```json
+  {
+      "message": "product not found"
+  }
+```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+      "type": "https://httpstatuses.com/403",
+      "title": "Unauthorized",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+```
+
+***

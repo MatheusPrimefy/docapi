@@ -1,5 +1,230 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Edit product'
+openapi: POST 'https://api.premepay.com/stores/:id/products/:id'
 ---
 
+* Request type: **\[PUT]**
+
+```json
+https://api.premepay.com/stores/:id/products/:id
+```
+
+### **Parameters List**
+
+| Parameter          | Type                                   | Description                                                              | Required |
+| ------------------ | -------------------------------------- | ------------------------------------------------------------------------ | -------- |
+| `name`             | string                                 | Product's name                                                           | Yes      |
+| `description`      | string                                 | Description                                                              | No       |
+| `unitPrice`        | decimal                                | Unit price                                                               | No       |
+| `currency`         | string                                 | Currency                                                                 | No       |
+| `shippable`        | boolean                                | Physical product or not                                                  | No       |
+| `unitLabel`        | string                                 | Label Description                                                        | No       |
+| `status`           | string                                 | Product Registration Status (Active, Disabled, Deleted)                  | No       |
+| `url`              | string                                 | Internet                                                                 | No       |
+| `metadata`         | dictionary (key, value)                | Used to save miscellaneous information in dictionary format (key, value) | No       |
+| `packageDimension` | object                                 |                                                                          | No       |
+| `height`           | decimal                                | Height                                                                   |          |
+| `length`           | decimal                                | Length                                                                   |          |
+| `weight`           | decimal                                | Weight                                                                   |          |
+| `width`            | decimal                                | Width                                                                    |          |
+| `images`           | array of objects                       |                                                                          |          |
+| `encodedFile`      | data:application/pdf;base64,base64code | File in base64 format                                                    | No       |
+| `description`      | string                                 | Brief description of the Product image                                   | No       |
+
+
+ > 💡 Important: This endpoint only updates Product data and adds new images. For an image already registered, it is necessary to delete it and upload the new desired image. Learn more at  [DELETE - Delete product image](https://www.notion.so/DELETE-Delete-product-image-831da094ad5c4b9585138f82f31ef7d8?pvs=21).
+
+
+
+ > 💡 Detail: You can associate up to 5 images per Product.
+
+
+### Request example
+
+This is an example of what your request to authenticate might look like.
+
+* Body
+
+```json
+  {
+  	"name": "Tennis Nike Air",
+  	"description": "Tennis Feminino",
+  	"unitPrice": "109.90",
+  	"currency": "BRL",
+  	"shippable": true,
+  	"unitLabel": "BOX-4A",
+  	"status": "active",
+  	"url": "www.nike.com",
+  	"metadata": {
+  		"item1": "item 1",
+  		"item2": "item 2"
+  	},
+  	"packageDimension": {
+  		"height": "1.00",
+  		"length": "2.00",
+  		"weight": "3.00",
+  		"width": "4.00"
+  	},
+  	"images": [
+  		{
+  			"encodedFile": "data:image/jpeg;base64",
+  			"description": "short description"
+  		},
+  		{
+  			"encodedFile": "data:image/jpeg;base64",
+  			"description": "short description"
+  		},
+  		{
+  			"encodedFile": "data:image/jpeg;base64",
+  			"description": "short description"
+  		},
+  		{
+  			"encodedFile": "data:image/jpeg;base64",
+  			"description": "short description"
+  		},
+  		{
+  			"encodedFile": "data:image/jpeg;base64",
+  			"description": "short description"
+  		}
+  	]
+  }
+  ```
+
+### **Responses**
+
+If your request is successful, you will receive the return of the updated Product object.
+
+* 200: OK
+
+
+```json
+  {
+      "id": 46,
+      "store": {
+          "id": 359,
+          "businessId": 110,
+          "identificationNumber": "46389383000566",
+          "companyName": "BDF LTDA",
+          "tradingName": null,
+          "logoPath": "https://{safe-url}/logotipos/a4d16d65-71e4-4514-b9e7-067fbdadd051.png",
+          "name": "Ontop",
+          "socialName": "Ontop",
+          "email": "suporte@ontop.com",
+          "phone": "(45) 34534-5345",
+          "address": null,
+          "documents": [],
+          "fxMerchant": null,
+          "generateInvoice": false
+      },
+      "name": "Tennis Nike Air",
+  		"description": "Tennis Feminino",
+      "unitPrice": 109.90,
+      "currency": "BRL",
+      "shippable": true,
+      "unitLabel": "BOX-4A",
+      "status": "Active",
+      "metadata": {
+          "item1": "item 1",
+          "item2": "item 2"
+      },
+      "url": "www.nike.com",
+      "createdOn": "2022-08-24T16:26:26.7842282Z",
+      "updatedOn": "2022-08-24T16:26:26.7842307Z",
+      "packageDimension": {
+          "height": 1.00,
+          "length": 2.00,
+          "weight": 3.00,
+          "width": 4.00
+      },
+      "images": [
+          {
+              "id": 134,
+              "filePath": "https://{safe-url}/produtos/359/1-0ce7ce6c-4136-4e96-9293-d2a32c356182.png",
+              "description": "short description"
+          },
+          {
+              "id": 135,
+              "filePath": "https://{safe-url}/produtos/359/2-e5558d61-339f-4137-af12-fb683fa6fe6d.png",
+              "description": "short description"
+          },
+          {
+              "id": 136,
+              "filePath": "https://{safe-url}/produtos/359/3-2dddf255-da38-437f-b994-bc2903fdf722.png",
+              "description": "short description"
+          },
+          {
+              "id": 137,
+              "filePath": "https://{safe-url}/produtos/359/4-5138a31d-6985-4c26-9bc9-27764898a106.png",
+              "description": "short description"
+          },
+          {
+              "id": 138,
+              "filePath": "https://{safe-url}/produtos/359/5-066c604f-2222-460a-b9d0-a2de80f782cf.png",
+              "description": "short description"
+          }
+      ]
+  }
+  ```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 400: Bad Request
+This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+
+```json
+  {
+      "errors": {
+          "Images": [
+              "you can't add more than 5 images"
+          ]
+      },
+      "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+      "title": "One or more validation errors occurred.",
+      "status": 400,
+      "traceId": "|7502924b-47c1fe46efb71345."
+  }
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+
+```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***

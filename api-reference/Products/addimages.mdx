@@ -1,5 +1,137 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Add new images to the product'
+openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
 ---
 
+* Request type: **\[POST]**
+
+```json
+https://api.premepay.com/v1/stores/:id/products/:id/images
+```
+
+
+Following the route above, you can register up to five images at once. The encodedFile property needs the image to be encoded in base64 format.
+
+### Request example
+
+This is an example of what your request to authenticate might look like.
+
+- Body
+    
+    ```json
+    {
+    	"images": [
+    		{
+    			"encodedFile": "data:image/jpeg;base64",
+    			"description": "some description",
+    		},
+    		{
+    			"encodedFile": "data:image/jpeg;base64",
+    			"description": "some description",
+    		},
+    		{
+    			"encodedFile": "data:image/jpeg;base64",
+    			"description": "some description",
+    		},
+    		{
+    			"encodedFile": "data:image/jpeg;base64",
+    			"description": "some description",
+    		}
+    	]
+    }
+    ```
+    
+
+### **Responses**
+
+If your request is successful, you will receive the return of the list of registered images.
+
+- 200: OK
+    
+    ```json
+    [
+    	{
+    		"id": 122,
+    		"filePath": "https://{safe-url}/produtos/359/1-d0e5f92a-ad8d-4254-a1b5-4549816d2a32.png",
+    		"description": "some description"
+    	},
+    	{
+    		"id": 123,
+    		"filePath": "https://{safe-url}/produtos/359/2-635198dc-71b3-45ad-8293-bdd6bdaa8f24.png",
+    		"description": "some description"
+    	},
+    	{
+    		"id": 124,
+    		"filePath": "https://{safe-url}/produtos/359/3-6003a565-fdf8-4484-b742-8bc9a330e368.png",
+    		"description": "some description"
+    	}
+    ]
+    ```
+    
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+    ```json
+    {
+        "errors": {
+            "Images": [
+                "you can't add more than 5 images"
+            ]
+        },
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "traceId": "|7502924b-47c1fe46efb71345."
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

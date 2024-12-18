@@ -124,11 +124,16 @@
       ]
     },
      {
-      "group": "Discount Coupons",
+      "group": "Products",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/Products/create",
+        "api-reference/Products/delete",
+         "api-reference/Products/addimages",
+          "api-reference/Products/deleteimages",
+           "api-reference/Products/edit",
+            "api-reference/Products/getdetails",
+             "api-reference/Products/gestlist",
+        "api-reference/Products/getsales"
       ]
     },
      {

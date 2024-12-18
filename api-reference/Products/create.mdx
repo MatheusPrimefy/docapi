@@ -13,9 +13,9 @@ Follow the route to requisition and create a new product to use in your sales. I
 
 ### Parameter List
 
-<aside>
+
   💡 Detail: You can associate up to 5 images per Product at the time of registration.
-</aside>
+
 
 ### Request Example
 
@@ -84,14 +84,13 @@ Follow the route to requisition and create a new product to use in your sales. I
   		}
   	]
   }
-  ```
+```
 
 ### **Responses**
 
 This is the answer for cases where your request is successful.
 
 * 200: OK
-
 
 ```json
   {
@@ -160,13 +159,12 @@ This is the answer for cases where your request is successful.
           }
       ]
   }
-  ```
+```
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
 * 400: Bad Request
-This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
-
+  This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
 
 ```json
   {
@@ -180,10 +178,10 @@ This is the answer for cases where the server does not process the request due t
       "status": 400,
       "traceId": "|7502924b-47c1fe46efb71345."
   }
-  ```
+```
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
   
   
   ```json
@@ -208,7 +206,7 @@ This is the answer for cases where the server does not process the request due t
     "instance": null,
     "extensions": {}
   }
-  ```
+```
 
 * 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
 
@@ -221,6 +219,6 @@ This is the answer for cases where the server does not process the request due t
       "instance": null,
       "extensions": {}
   }
-  ```
+```
 
 ***

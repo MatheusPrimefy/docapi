@@ -1,0 +1,193 @@
+---
+title: 'Create plan'
+openapi: POST 'https://api.premepay.com/v1/stores/:id/plans'
+---
+
+* Request type: **\[POST]**
+
+```json
+https://api.premepay.com/v1/stores/:id/plans
+```
+
+
+Primefy provides its users with the functionality to create personalized subscription plans. To customize your plans, you first need to create your subscription plan. Once you have your subscription plan created, you will only need to link the subscribing consumers, following the steps described in the Subscription plan section.
+
+- Creating the plan allows the addition of different payment recurrence periods, according to the **Frequency Codes for Primefy Recurring Payments.** It is also possible to parameterize grace periods, trial periods and payment exemptions. That means you can:
+- Implement subscription plans during the trial period;
+- Enable your consumer to start paying for the subscription plan after a specific period;
+- Add required users to access the subscription plan package, free of charge.
+- Associating Products with a Plan.
+
+The Subscription Plan can be associated with national and international consumers.
+
+You can create a subscription plan using the route above.
+
+### **Parameters List**
+
+| Parameter | Type | Description | Required |
+| --- | --- | --- | --- |
+| `name` | string | Plan name | Yes |
+| `description` | string | Description | Yes |
+| `frequency` | integer | Frequency | Yes |
+| `paymentTypes` | array integer | Payment type | Yes, at least one |
+|  | `0` | Credit card |  |
+|  | `1` | Bank Slip (Boleto Bancário) |  |
+|  | `3` | Pix |  |
+| `products` | array object | Products associated with the Plan | No |
+|      `productId` | integer | [Product](https://www.notion.so/Products-214efc5818e940a1803c21873e89557c?pvs=21) Id | No |
+|      `quantity` | decimal | Number of Products associated with the Plan | No |
+| `amount` | decimal | Amount | Yes |
+| `currency` | string | Alpha code of the currency to be processed. Example: "GBP", "USD", "CAD” | Yes (for International Plans) |
+| `gracePeriod` | integer | Grace period | Yes |
+| `maxCharges` | integer | Number of charges according to frequency. Use the value 0 for recurring charges with no maximum period | No |
+| `chargeDaysBefore` | integer | Defines how many days before the charge should be generated | No |
+| `tax` | object |  | No |
+|  | `mode` | See table above with descriptions | No |
+|  | `amount` | Value of the Fee to be applied | No |
+
+### Frequency codes for Recurring Payments
+
+| ID | Status |
+| --- | --- |
+| 0 | Daily |
+| 1 | Weekly |
+| 2 | Monthly |
+| 3 | Quarterly |
+| 4 | Six-monthly |
+| 5 | Annual |
+
+### **Request example**
+
+This is an example of what your request to create a subscription plan might look like. This is the necessary first step to add your customers to a recurring subscription plan.
+
+- Body
+    
+    ```json
+    {
+        "name": "Plano Mensal",
+        "description": "Descrição Plano Mensal",
+        "frequency": 2,
+        "paymentTypes": [
+            0,
+            1,
+            3
+        ],
+    		"products": [
+    		{
+    			"productId": 31,
+    			"quantity": 2
+    		}
+    		],
+        "amount": 10,
+        "maxCharges": 12,
+        "chargeDaysBefore": 1,
+        "gracePeriod": 0,
+        "tax": {
+            "mode": "percentage",
+            "amount": 2
+        }
+    }
+    ```
+    
+
+### **Responses**
+
+- 200: OK
+    
+    This is the answer for cases where your request is successful.
+    
+    ```json
+    {
+        "id": 19888,
+        "name": "Plano Mensal",
+        "amount": 19.80,
+        "products": [
+            {
+                "id": 31,
+                "name": "Meu Produto",
+                "description": "Descrição do Produto",
+                "quantity": 2,
+                "unitPrice": 9.90
+            }
+        ],
+        "currency": "BRL",
+        "gracePeriod": 0,
+        "frequency": "Monthly",
+        "status": "Active",
+        "maxCharges": 12,
+        "chargeDaysBefore": 1,
+        "tax": null,
+        "isVisible": true
+    }
+    ```
+    
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+    ```json
+    {
+        "errors": {
+            "Frequency": [
+                "The field Frequency is invalid."
+            ]
+        },
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "traceId": "|75017fc5-47c1fe46efb71345."
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+    {
+        "type": "https://httpstatuses.com/401",
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Forbidden",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

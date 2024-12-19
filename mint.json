@@ -159,11 +159,20 @@
       ]
     },
      {
-      "group": "Financial",
+      "group": "Signatures",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/Signatures/Addcustomertoplan",
+         "api-reference/Signatures/Cancelasubscription",
+          "api-reference/Signatures/Createplan",
+           "api-reference/Signatures/Deleteplan",
+            "api-reference/Signatures/Deleteplancustomer",
+             "api-reference/Signatures/Disassociateaproduct",
+              "api-reference/Signatures/Listplans",
+               "api-reference/Signatures/Reactivateasubscription",
+                "api-reference/Signatures/Updatesubscriptiondetails",
+                 "api-reference/Signatures/customersonaplan",
+                  "api-reference/endpoint/plandetails",
+                    "api-reference/endpoint/subscriptiondetails"
       ]
     },
      {

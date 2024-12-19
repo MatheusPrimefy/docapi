@@ -1,10 +1,306 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Create sale on Pix'
+openapi: POST 'https://api.premepay.com/v1/stores/:id/orders'
 ---
+Learn more about managing Pix payment orders processed by Primefy.
+
+To charge via Pix, you must create a payment order. In this section you will find detailed information related to card payment method.
+
+You can recover and reverse individual charges by following the parameters presented in [Refund](https://www.notion.so/reembolso). You can also list all payment orders, view the details or delete a payment order according to the given specifications.
+
+Currently, the Payment Order using the Pix payment method is offered in cash, with dynamic QR Code and expiry period of 24 hours. If payment is not made within this period, this Payment Order will be automatically canceled and you will need to create a new one.
+
 
 * Request type: **\[POST]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/orders
 ```
+
+Using the route above you can add a payment order with Pix.
+
+### **Parameters List**
+
+| **Parameter**           | **Type**           | **Description**                                                            | **Required**                                            |
+| ----------------------- | ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `customerId`            | integer            | Customer identifier                                                        | Yes                                                    |
+| `fingerprint`           | string             | User session unique identifier                                              | No                                                     |
+| `includeFeeTransfer`    | boolean            | Indicates whether fees should be passed on to the consumer                  | No                                                     |
+| `amount`                | decimal            | Total amount to be charged                                                  | Yes                                                    |
+| `description`           | string             | Sale Description                                                            | Yes                                                    |
+| `voucher`               | string             | Discount coupon                                                             | No                                                     |
+| `payment`               | object             | Payment information                                                         | Yes                                                    |
+| `payment.type`          | string             | Payment type (pix)                                                         | Yes                                                    |
+| `payment.installments`  | integer            | Number of installments                                                      | Yes                                                    |
+| `splits`                | array object     | Splits                                                                      | No                                                     |
+| `splits.splitRuleId`    | integer            | It can be one or more                                                       | Yes                                                    |
+| `metadata`              | dictionary         | Used to save miscellaneous information in dictionary format (key-value)    | No                                                     |
+| `warrantyDays`          | integer            | Service Warranty Time in Days                                              | No                                                     |
+| `whenShouldIssueNfe`    | object             | When to issue the NFe                                                       | Yes, if `sendNftToCustomer` property is used           |
+| `whenShouldIssueNfe.0`  |                    | At the time of sale                                                         | No                                                     |
+| `whenShouldIssueNfe.1`  |                    | After warranty                                                              | No                                                     |
+| `whenShouldIssueNfe.2`  |                    | Do not issue                                                                | No                                                     |
+| `sendNfeToCustomer`     | boolean            | Send invoice to consumer                     
+
+
+
+> NFE properties are only available in case of integration with eNotas.
+
+
+
+### Status related to Order
+
+| **Status** | Meaning |
+| --- | --- |
+| `New` | Temporary status, if this status persists, contact support |
+| `Succeded` | Order created successfully |
+| `Canceled` | Order canceled |
+| `Failed` | Failed during order creation |
+
+### Status related to Payment
+
+| **Status** | Meaning |
+| --- | --- |
+| `New` | Temporary status, if this status persists, contact support |
+| `Pending` | Pending payment |
+| `Succeded` | Payment made successfully |
+| `Canceled` | Payment Canceled |
+| `Dispute` | Payment in Dispute |
+| `Failed` | Payment Failure |
+| `ChargedBack` | Lost Dispute |
+| `DisputeSucceeded` | Dispute Overdue |
+
+>
+💡 Important: the discount coupon changes the final value of the Payment Order.
+
+
+
+### Request example
+
+This is an example of what your request to authenticate might look like.
+
+- Body
+    
+    ```json
+    {
+        "includeFeeTransfer": false,
+        "amount": 100,
+        "customerId": 14913,
+        "description": "Produtos Diversos",
+        "splits": [
+            {
+                "splitRuleId": 588
+            }
+        ],
+        "products": [
+            {
+                "productId": "21",
+                "quantity": 3
+            },
+            {
+                "productId": "28",
+                "quantity": 1
+            }
+        ],
+        "payment": {
+            "type": "pix",
+            "installments": 1
+        },
+        "metadata": {
+            "id": "17a17c37-b83f-4efd-a629-3c0fd692345d",
+            "user": "admin",
+            "permission": "all"
+        },
+        "warrantyDays": 30,
+        "whenShouldIssueNfe": 0,
+        "sendNfeToCustomer": true
+    }
+    ```
+    
+
+### **Responses**
+
+- 200: Ok
+    
+    Esta é a resposta para os casos em que sua requisição seja bem sucedida.
+    
+    ```json
+    {
+        "id": 192557,
+        "storeId": 359,
+        "storeName": "Ontop",
+        "number": "P629815",
+        "includeFeeTransfer": false,
+        "amount": 310.00,
+        "netAmount": 310.00,
+        "fee": 0.0,
+        "splits": [
+            {
+                "splitRule": {
+                    "id": 588,
+                    "recipient": {
+                        "id": 382,
+                        "name": "Kennedy Teste 5"
+                    },
+                    "type": "Percentage",
+                    "disputeLiable": true,
+                    "refundLiable": true,
+                    "percentage": 2.0000,
+                    "fixed": 2.00
+                },
+                "saleCommission": {
+                    "amount": 8.20,
+                    "status": "Succeded",
+                    "createdOn": "2022-08-23T10:01:17.5068449Z"
+                }
+            }
+        ],
+        "currency": "BRL",
+        "description": "Produtos Diversos",
+        "status": "Succeded",
+        "createdOn": "2022-08-23T10:01:15.4603572Z",
+        "customer": {
+            "id": 14913,
+            "firstName": "Calebe Carlos Osvaldo Ribeiro",
+            "surname": "",
+            "identificationNumber": "22441639544",
+            "birthdate": null,
+            "email": "calebecarlosribeiro@outlock.com.br",
+            "phone": null
+        },
+        "products": [
+            {
+                "id": 21,
+                "name": "name",
+                "description": "description",
+                "unitPrice": 100.00,
+                "quantity": 3.0,
+                "packageDimension": null,
+                "images": []
+            },
+            {
+                "id": 28,
+                "name": "product 28",
+                "description": "description",
+                "unitPrice": 10.00,
+                "quantity": 1.0,
+                "packageDimension": null,
+                "images": []
+            }
+        ],
+        "payment": {
+            "id": 192547,
+            "number": "d284d15adcfe4f2085b7cbb453ee2383",
+            "amount": 310.00,
+            "type": "Pix",
+            "installments": 1,
+            "pix": {
+                "id": 717,
+                "amount": 310.00,
+                "copyPaste": "00020101021226770014BR.GOV.BCB.PIX2555api.itau/pix/qr/v2/f36cbaec-ad7e-49ab-b500-11370bac658d5204000053039865802BR5925ZOOP TECNOLOGIA E MEIOS D6009SAO PAULO62070503***63048893",
+                "url": "https://preme.s3.us-east-2.amazonaws.com/pix/qrcodes/P629815.svg",
+                "expirationDate": "2022-08-23T10:06:16",
+                "initializationType": "Dynamic"
+            },
+            "lateFee": null,
+            "interestOrFine": null,
+            "discount": null,
+            "createdOn": "2022-08-23T10:01:15.4603593Z",
+            "receivedOn": null,
+            "status": "Pending"
+        },
+        "payments": [],
+        "receivables": [],
+        "fxPayment": null,
+        "tax": null,
+        "isMultiplePayments": false,
+        "paymentLink": null,
+        "metadata": {
+            "id": "17a17c37-b83f-4efd-a629-3c0fd692345d",
+            "user": "admin",
+            "permission": "all"
+        },
+        "chargeDaysBefore": null,
+        "warrantyDays": 30,
+        "whenShouldIssueNfe": "OnSell",
+        "sendNfeToCustomer": true,
+        "printableLink": null,
+        "xmlLink": null
+    }
+    ```
+    
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+    ```json
+    {
+        "errors": {
+            "Order": [
+                "You cannot create an order using Pix installments greater than 1"
+            ]
+        },
+        "metadata": null,
+        "type": "https://httpstatuses.com/400",
+        "title": "Bad Request",
+        "status": 400,
+        "detail": "One or more errors ocurred",
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+    
+    ```json
+    
+    {
+        "type": "https://httpstatuses.com/401",
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Unauthorized",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---
+
+

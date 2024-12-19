@@ -147,11 +147,15 @@
       ]
     },
      {
-      "group": "Signatures",
+      "group": "Sales",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/Sales/boleto",
+        "api-reference/Sales/capture",
+        "api-reference/Sales/credit",
+        "api-reference/Sales/filtersales",
+        "api-reference/Sales/listsales",
+        "api-reference/Sales/pix",
+        "api-reference/Sales/salesdetails"
       ]
     },
      {

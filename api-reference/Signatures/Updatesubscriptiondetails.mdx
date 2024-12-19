@@ -6,193 +6,163 @@ openapi: PUT 'https://api.premepay.com/v1/stores/{storeId}/subscriptions/{:id}/'
 * Request type: **\[PUT]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/{storeId}/subscriptions/{:id}/
 ```
 
+> 💡 **Do you already have a Subscription Plan?**
+> You will be able to enroll users in Subscription Plans once you have an existing Subscription Plan.
 
-
->💡 **Do you already have a Subscription Plan?**
-You will be able to enroll users in Subscription Plans once you have an existing Subscription Plan.
-
->See below for how to update a subscription's information.
+> See below for how to update a subscription's information.
 
 💡 The subscription is non-transferable and it is not possible to update the customer id. In scenarios like this, cancel the current subscription and create a new one for the new customer.
 
-
-
 ### **Parameters List**
 
-| **Parameter**       | **Type**        | **Description**                                                                                                   | **Required**                                                           |
-| ------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `planId`            | integer         | Id of the Plan to which the subscription must be associated                                                       | Yes                                                                    |
-| `payment`           | object          | Payment method information                                                                                         | Yes                                                                    |
-| `payment.type`      | string          | One of the options: `Credit`, `Boleto`, `Pix`                                                                       | Yes                                                                    |
-| `payment.cardId`    | integer         | Indicates the ID of the card on which the charge will be made (previously registered)                             | If the billing type is `Credit`                                        |
-| `metadata`          | dictionary      | Used to save miscellaneous information in dictionary format key, value                                          | No                                                                     |
-| `includeFeeTransfer`| boolean         | Indicates whether fees should be passed on to the consumer                                                          | No                                                                     |
-| `daysBetweenRetries`| integer         | Number of days between billing retries                                                                             | No                                                                     |
-| `maxRetries`        | integer         | Maximum number of retries                                                                                          | No                                                                     |
-
+| **Parameter**        | **Type**   | **Description**                                                                       | **Required**                    |
+| -------------------- | ---------- | ------------------------------------------------------------------------------------- | ------------------------------- |
+| `planId`             | integer    | Id of the Plan to which the subscription must be associated                           | Yes                             |
+| `payment`            | object     | Payment method information                                                            | Yes                             |
+| `payment.type`       | string     | One of the options: `Credit`, `Boleto`, `Pix`                                         | Yes                             |
+| `payment.cardId`     | integer    | Indicates the ID of the card on which the charge will be made (previously registered) | If the billing type is `Credit` |
+| `metadata`           | dictionary | Used to save miscellaneous information in dictionary format key, value                | No                              |
+| `includeFeeTransfer` | boolean    | Indicates whether fees should be passed on to the consumer                            | No                              |
+| `daysBetweenRetries` | integer    | Number of days between billing retries                                                | No                              |
+| `maxRetries`         | integer    | Maximum number of retries                                                             | No                              |
 
 **Request example**
 
 This is an example of how submitting your request to reactivate a subscription plan should look like.
 
-- Body
-    
-    ```json
-    {
-        "planId": 19922,
-        "includeFeeTransfer": false,
-        "payment": {
-    				"type": "credit",
-    				"cardId": 31220
-    		},
-        "maxRetries": 3,
-        "daysBetweenRetries": 3,
-        "metadata": {
-            "internalId": "4727751a-7a34-11ed-a1eb-0242ac120002"
-        }
-    }
-    ```
-    
+* Body```json
+  {
+      "planId": 19922,
+      "includeFeeTransfer": false,
+      "payment": {
+  				"type": "credit",
+  				"cardId": 31220
+  		},
+      "maxRetries": 3,
+      "daysBetweenRetries": 3,
+      "metadata": {
+          "internalId": "4727751a-7a34-11ed-a1eb-0242ac120002"
+      }
+  }
+  ```
 
 ### **Responses**
 
-- 200: Ok
-    
-    This is the answer in both scenarios for cases where your request succeeds.
-    
-    ```json
-    {
-        "id": 112102,
-        "plan": {
-            "id": 19922,
-            "name": "Plano Mensal com 2 Produtos",
-            "amount": 100.00,
-            "products": [
-                {
-                    "id": 79,
-                    "name": "Product 1",
-                    "description": "Description Product 1",
-                    "quantity": 1,
-                    "unitPrice": 150.00
-                },
-                {
-                    "id": 62,
-                    "name": "Product 2",
-                    "description": "Desacription Product 2",
-                    "quantity": 1,
-                    "unitPrice": 9.90
-                }
-            ],
-            "currency": "BRL",
-            "gracePeriod": 0,
-            "frequency": "Monthly",
-            "status": "Active",
-            "paymentTypes": [
-                "Credit",
-                "Boleto",
-                "Pix"
-            ],
-            "maxCharges": 12,
-            "chargeDaysBefore": 0
-        },
-        "customer": {
-            "id": 14953,
-            "firstName": "Luana Elaine",
-            "surname": "Dias",
-            "identificationNumber": "10019073615",
-            "birthdate": "1968-08-08T00:00:00",
-            "email": "tekom65443@esmouds.com",
-            "phone": "(17) 2765-2965",
-            "address": {
-                "street": "Rua Rio de Janeiro",
-                "number": "702",
-                "zipCode": "77060160",
-                "reference": null,
-                "district": "Jardim Aureny I (Taquaralto)",
-                "city": "Palmas",
-                "state": "TO",
-                "country": "BR"
-            }
-        },
-        "payment": {
-            "type": "Credit",
-            "cardId": 31220
-        },
-        "includeFeeTransfer": false,
-        "metadata": {
-            "internalId": "4727751a-7a34-11ed-a1eb-0242ac120002"
-        },
-        "maxRetries": 3,
-        "daysBetweenRetries": 3
-    }
-    ```
-    
+* 200: OkThis is the answer in both scenarios for cases where your request succeeds.```json
+  {
+      "id": 112102,
+      "plan": {
+          "id": 19922,
+          "name": "Plano Mensal com 2 Produtos",
+          "amount": 100.00,
+          "products": [
+              {
+                  "id": 79,
+                  "name": "Product 1",
+                  "description": "Description Product 1",
+                  "quantity": 1,
+                  "unitPrice": 150.00
+              },
+              {
+                  "id": 62,
+                  "name": "Product 2",
+                  "description": "Desacription Product 2",
+                  "quantity": 1,
+                  "unitPrice": 9.90
+              }
+          ],
+          "currency": "BRL",
+          "gracePeriod": 0,
+          "frequency": "Monthly",
+          "status": "Active",
+          "paymentTypes": [
+              "Credit",
+              "Boleto",
+              "Pix"
+          ],
+          "maxCharges": 12,
+          "chargeDaysBefore": 0
+      },
+      "customer": {
+          "id": 14953,
+          "firstName": "Luana Elaine",
+          "surname": "Dias",
+          "identificationNumber": "10019073615",
+          "birthdate": "1968-08-08T00:00:00",
+          "email": "tekom65443@esmouds.com",
+          "phone": "(17) 2765-2965",
+          "address": {
+              "street": "Rua Rio de Janeiro",
+              "number": "702",
+              "zipCode": "77060160",
+              "reference": null,
+              "district": "Jardim Aureny I (Taquaralto)",
+              "city": "Palmas",
+              "state": "TO",
+              "country": "BR"
+          }
+      },
+      "payment": {
+          "type": "Credit",
+          "cardId": 31220
+      },
+      "includeFeeTransfer": false,
+      "metadata": {
+          "internalId": "4727751a-7a34-11ed-a1eb-0242ac120002"
+      },
+      "maxRetries": 3,
+      "daysBetweenRetries": 3
+  }
+  ```
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
-- 400: Bad Request
-    
-    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
-    
-    ```json
-    {
-      "errors": [
-        {
-          "message": "Error description" 
-        }
-      ]
-    }
-    ```
-    
-- 401: Unauthorized
-    
-    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
-    
-    ```json
-    
-    {
-        "type": "https://httpstatuses.com/401",
-        "title": "Unauthorized",
-        "status": 401,
-        "detail": null,
-        "instance": null,
-        "extensions": {}
-    }
-    ```
-    
-- 403: Forbidden
-    
-    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
-    
-    ```json
-    {
-        "type": "https://httpstatuses.com/403",
-        "title": "Unauthorized",
-        "status": 403,
-        "detail": null,
-        "instance": null,
-        "extensions": {}
-    }
-    ```
-    
-- 500: Internal Server Error
-    
-    This is the answer for cases where an internal server error occurs.
-    
-    ```json
-    {
-        "type": "https://httpstatuses.com/500",
-        "title": "Internal Server Error",
-        "status": 500,
-        "detail": null,
-        "instance": null,
-        "extensions": {}
-    }
-    ```
-    
+* 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.```json
+  {
+    "errors": [
+      {
+        "message": "Error description" 
+      }
+    ]
+  }
+  ```
 
----
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
+
+  {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.```json
+  {
+      "type": "https://httpstatuses.com/403",
+      "title": "Unauthorized",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***

@@ -1,10 +1,71 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Delete plan'
+openapi: DELETE 'https://api.premepay.com/v1/stores/:id/plans/:id'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[DELETE]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/plans/:id
 ```
+
+You have the possibility to permanently delete a subscription plan.
+
+When requesting the deletion of a subscription plan, any consumer who is associated with this plan will also be immediately unlinked.
+
+>⚠️ **Attention:** This action is irreversible.
+
+
+
+### **Responses**
+
+- 200: Ok
+    
+    This is the answer for cases where your request is successful.
+    
+    ```json
+    {
+        "message": "Plan deleted"
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+     {
+      "error": {
+        "message": "Unauthorized"
+      } 
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+      "error": {
+        "message": "Forbidden"      
+      }
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+      "error": {
+        "message": "Internal server error"
+      } 
+    }
+    ```
+    
+
+---

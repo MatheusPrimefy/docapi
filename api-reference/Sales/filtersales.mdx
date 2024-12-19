@@ -21,15 +21,15 @@ With the Primefy API and the route above, you can view the details of a payment 
 
 **Filter**: identificationNumber
 
-`https://api.premepay.com/v1/stores/:id/orders/search?identificationNumber={identification-number}`
+>https://api.premepay.com/v1/stores/:id/orders/search?identificationNumber={identification-number}`
 
 **Filter**: name. This filter considers the consumer's first and last name, even if partial.
 
-`https://api.premepay.com/v1/stores/:id/orders/search?name={nome-ou-sobrenome-do-consumidor}`
+>https://api.premepay.com/v1/stores/:id/orders/search?name={nome-ou-sobrenome-do-consumidor}`
 
 **Filter**: name and number
 
-`https://api.premepay.com/v1/stores/:id/orders/search?name={nome-ou-sobrenome-do-cosumidor&number={orderNumber}`
+>https://api.premepay.com/v1/stores/:id/orders/search?name={nome-ou-sobrenome-do-cosumidor&number={orderNumber}`
 
 ### Parameter List
 
@@ -45,7 +45,6 @@ With the Primefy API and the route above, you can view the details of a payment 
 ### **Responses**
 
 * 200: OkThis is the answer for cases where your request is successful.
-
 
 ```json
   [
@@ -129,7 +128,7 @@ With the Primefy API and the route above, you can view the details of a payment 
           "xmlLink": null
       }
   ]
-  ```
+```
 
 * 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
 
@@ -140,13 +139,10 @@ With the Primefy API and the route above, you can view the details of a payment 
       "status": 400,
       "detail": "Order not found"
   }
-  ```
+```
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
-  
-  
-  ```json
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
   {
       "type": "https://httpstatuses.com/401",
       "title": "Unauthorized",
@@ -158,8 +154,7 @@ With the Primefy API and the route above, you can view the details of a payment 
   ```
 
 * 403: Forbidden
-This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
-
+  This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
 
 ```json
   {
@@ -170,10 +165,9 @@ This is the response for cases where the request has been banned. This happens w
       "instance": null,
       "extensions": {}
   }
-  ```
+```
 
 * 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
-
 
 ```json
   {
@@ -184,6 +178,6 @@ This is the response for cases where the request has been banned. This happens w
       "instance": null,
       "extensions": {}
   }
-  ```
+```
 
 ***

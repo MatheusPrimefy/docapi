@@ -8,3 +8,81 @@ openapi: GET 'https://api.premepay.com/v1/stores/:id/plans/:id/subscriptions'
 ```json
 https://api.premepay.com/v1/stores/:id/plans/:id/subscriptions
 ```
+
+Through the route above you will receive a list of subscriptions registered for the Store.
+Check below the possible responses from the Primefy API for this request.
+
+### Responses
+
+- 200: OK
+    
+    This is the answer for cases where your request is successful.
+    
+    ```json
+    [
+        {
+            "id": 112035,
+            "planId": 19830,
+            "plan": null,
+            "includeFeeTransfer": false,
+            "customerId": 14732,
+            "productCategory": null,
+            "paymentType": 0,
+            "lastPayment": "2022-08-22T10:28:49",
+            "nextPayment": "2022-09-22T10:28:51",
+            "status": 0,
+            "createdOn": "2022-08-22T10:28:49",
+            "updatedOn": "2022-08-22T10:28:51",
+            "cardId": 30333,
+            "userTracking": null,
+            "payment": null,
+            "splits": null,
+            "splitsSubscriptions": null,
+            "paymentLink": null,
+            "whenShouldIssueNfe": null,
+            "warrantyDays": null,
+            "sendNfeToCustomer": null,
+            "currency": null,
+            "generateAllBoletos": false,
+            "fxAmount": 0.0,
+            "retries": 0,
+            "maxRetries": 60,
+            "daysBetweenRetries": 3
+        }
+    ]
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Unauthorized",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Forbidden",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

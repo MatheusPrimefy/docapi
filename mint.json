@@ -171,8 +171,8 @@
                "api-reference/Signatures/Reactivateasubscription",
                 "api-reference/Signatures/Updatesubscriptiondetails",
                  "api-reference/Signatures/customersonaplan",
-                  "api-reference/endpoint/plandetails",
-                    "api-reference/endpoint/subscriptiondetails"
+                  "api-reference/Signatures/plandetails",
+                    "api-reference/Signatures/subscriptiondetails"
       ]
     },
      {

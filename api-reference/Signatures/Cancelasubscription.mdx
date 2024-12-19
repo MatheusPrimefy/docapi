@@ -1,10 +1,101 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Cancel a subscription'
+openapi: POST 'https://api.premepay.com/v1/stores/{storeId}/subscriptions/{:id}/cancel'
 ---
 
 * Request type: **\[POST]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/{storeId}/subscriptions/{:id}/cancel
 ```
+
+
+>💡 **Do you already have a Subscription Plan?**
+You will be able to enroll users in Subscription Plans once you have an existing Subscription Plan.
+
+
+>💡 Canceling your subscription also cancels any pending charges.
+
+
+
+### **Responses**
+
+- 200: Ok
+    
+    This is the answer for cases where your request is successful.
+    
+    ```json
+    {
+        "id": 9541,
+        "plan": "Plano Mensal",
+        "nextPayment": null,
+        "status": "Canceled"
+    }
+    ```
+    
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+    ```json
+    {
+      "errors": [
+        {
+          "message": "Error description" 
+        }
+      ]
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+    {
+        "type": "https://httpstatuses.com/401",
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Unauthorized",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

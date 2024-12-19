@@ -1,5 +1,125 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: 'Sale details'
+openapi: 'GET https://api.premepay.com/v1/stores/:id/orders/:order-number '
 ---
 
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/orders/:order-number
+```
+
+* Would you like to list Business payment order details?Use the endpoint:
+```json
+https://api.premepay.com/v1/business/:id/orders/:order-number`
+  ```
+
+With the Primefy API and the routes below, you can view the details of a payment order.
+
+**Responses**
+
+* 200: OkThis is the answer for cases where your request is successful.
+
+```json
+  {
+    "id": 198564,
+    "storeId": 7591,
+    "number": "P278050",
+    "includeFeeTransfer": false,
+    "amount": 275.50,
+    "netAmount": 270.00,
+    "fee": 5.50,
+    "description": "Descrição da venda",
+    "status": "Succeded",
+    "createdOn": "2020-07-24T13:35:03.145Z",
+    "customer": {
+      "id": 2345,
+      "firstName": "Jorge Noah",
+      "surname": "Barbosa",
+      "birthdate": "1975-10-10",
+      "identificationNumber": "90202017940",
+      "email": "jorgebarbosa@premepay.com",
+      "phone": "(48) 998711234" 
+    },
+    "payment": {
+      "id": 197485,
+      "number": "b10da7c0347b40cc8c34664cb60445c0",
+      "amount": 275.50,
+      "type": "Credit",
+      "installments": 5,
+      "card": {
+        "cardBrand": "Visa",
+        "holderName": "Jorge Noah Barbosa",
+        "expirationMonth": 2,
+        "expirationYear": 2026,
+        "firstDigits": "4539",
+        "lastDigits": "5497"
+      },
+      "fraudScore": {
+        "score": 37.06 
+      },
+      "createdOn": "2020-07-24T13:35:03.145Z",
+      "status": "Succeded"    
+    }
+  }
+  ```
+
+* 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+
+
+```json
+  {
+      "type": "https://httpstatuses.com/400",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "Order not found"
+  }
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  
+  ```json
+  {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+
+This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+      "type": "https://httpstatuses.com/403",
+      "title": "Unauthorized",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***
+
+```
+```

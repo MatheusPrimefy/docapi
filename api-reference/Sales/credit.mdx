@@ -10,30 +10,29 @@ https://api.premepay.com/v1/stores/:id/orders
 ```
 
 ### **Parameters List**
-| **Parameter**              | **Type**           | **Description**                                                                 | **Required**                                                    |
-| ------------------------- | ------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `customerId`              | integer            | Customer identifier                                                             | Yes                                                            |
-| `fingerprint`             | string             | User session unique identifier                                                   | No                                                             |
-| `includeFeeTransfer`      | boolean            | Indicates whether fees should be passed on to the consumer                       | No                                                             |
-| `amount`                  | decimal            | Total amount to be charged                                                       | Yes                                                            |
-| `description`             | string             | Sale Description                                                                 | Yes                                                            |
-| `voucher`                 | string             | Discount coupon                                                                  | No                                                             |
-| `payment`                 | object             | Payment information                                                              | Yes                                                            |
-| `payment.type`            | string             | Payment type (credit)                                                            | Yes                                                            |
-| `payment.installments`    | string             | Number of installments                                                           | Yes                                                            |
-| `payment.cardId`          | integer            | Credit card identifier                                                           | Yes                                                            |
-| `payment.payLater`        | boolean            | Use it if you want to pre-authorize and reserve the amount for up to 28 days, and then capture it. | No |
-| `splits`                  | array object     | Divisões                                                                         | No                                                             |
-| `splits.splitRuleId`      | int                | It can be one or more                                                            | Yes                                                            |
-| `metadata`                | dictionary         | Used to save miscellaneous information in dictionary format `<key, value>`       | No                                                             |
-| `warrantyDays`            | int                | Service Warranty Time in Days                                                   | No                                                             |
-| `whenShouldIssueNfe`      | object             | When to issue the NFe                                                            | Yes, if `sendNftToCustomer` property is used                    |
-| `whenShouldIssueNfe.0`    |                    | At the time of sale                                                              |                                                                |
-| `whenShouldIssueNfe.1`    |                    | After warranty                                                                   |                                                                |
-| `whenShouldIssueNfe.2`    |                    | Do not issue                                                                    |                                                                |
-| `sendNfeToCustomer`       | boolean            | Send invoice to consumer                                                         | Yes, if `whenShouldIssueNfe` property is used                   |
 
-
+| **Parameter**          | **Type**     | **Description**                                                                                    | **Required**                                  |
+| ---------------------- | :----------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `customerId`           | integer      | Customer identifier                                                                                | Yes                                           |
+| `fingerprint`          | string       | User session unique identifier                                                                     | No                                            |
+| `includeFeeTransfer`   | boolean      | Indicates whether fees should be passed on to the consumer                                         | No                                            |
+| `amount`               | decimal      | Total amount to be charged                                                                         | Yes                                           |
+| `description`          | string       | Sale Description                                                                                   | Yes                                           |
+| `voucher`              | string       | Discount coupon                                                                                    | No                                            |
+| `payment`              | object       | Payment information                                                                                | Yes                                           |
+| `payment.type`         | string       | Payment type (credit)                                                                              | Yes                                           |
+| `payment.installments` | string       | Number of installments                                                                             | Yes                                           |
+| `payment.cardId`       | integer      | Credit card identifier                                                                             | Yes                                           |
+| `payment.payLater`     | boolean      | Use it if you want to pre-authorize and reserve the amount for up to 28 days, and then capture it. | No                                            |
+| `splits`               | array object | Divisões                                                                                           | No                                            |
+| `splits.splitRuleId`   | int          | It can be one or more                                                                              | Yes                                           |
+| `metadata`             | dictionary   | Used to save miscellaneous information in dictionary format `<key, value>`                         | No                                            |
+| `warrantyDays`         | int          | Service Warranty Time in Days                                                                      | No                                            |
+| `whenShouldIssueNfe`   | object       | When to issue the NFe                                                                              | Yes, if `sendNftToCustomer` property is used  |
+| `whenShouldIssueNfe.0` |              | At the time of sale                                                                                |                                               |
+| `whenShouldIssueNfe.1` |              | After warranty                                                                                     |                                               |
+| `whenShouldIssueNfe.2` |              | Do not issue                                                                                       |                                               |
+| `sendNfeToCustomer`    | boolean      | Send invoice to consumer                                                                           | Yes, if `whenShouldIssueNfe` property is used |
 
 > The NFe properties are only available in the case of integration with eNotas.
 
@@ -109,7 +108,7 @@ This is an example of how your request to create a new Payment Order with the Cr
       "whenShouldIssueNfe": 0,
       "sendNfeToCustomer": true
   }
-  ```
+```
 
 ### **Responses**
 
@@ -218,10 +217,9 @@ This is an example of how your request to create a new Payment Order with the Cr
       "printableLink": null,
       "xmlLink": null
   }
-  ```
+```
 
 * 200: Ok (3DS 2.0 step)This is the answer for cases where your request is successful.
-
 
 ```json
   {
@@ -279,12 +277,11 @@ This is an example of how your request to create a new Payment Order with the Cr
   "xmlLink": null,
   "internationalPayment": null
   }
-  ```
+```
 
 If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
 
 * 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
-
 
 ```json
   {
@@ -301,13 +298,10 @@ If your request has invalid creation parameters - for example, specifying an inv
       "instance": null,
       "extensions": {}
   }
-  ```
+```
 
 * 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
-  
-  
-  ```json
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*```json
 
   {
       "type": "https://httpstatuses.com/401",
@@ -321,7 +315,6 @@ If your request has invalid creation parameters - for example, specifying an inv
 
 * 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
 
-
 ```json
   {
       "type": "https://httpstatuses.com/403",
@@ -331,10 +324,9 @@ If your request has invalid creation parameters - for example, specifying an inv
       "instance": null,
       "extensions": {}
   }
-  ```
+```
 
 * 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
-
 
 ```json
   {
@@ -345,6 +337,6 @@ If your request has invalid creation parameters - for example, specifying an inv
       "instance": null,
       "extensions": {}
   }
-  ```
+```
 
 ***

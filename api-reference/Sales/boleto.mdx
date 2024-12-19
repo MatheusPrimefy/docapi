@@ -1,10 +1,311 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Create sale in Boleto'
+openapi: POST 'https://api.premepay.com/v1/stores/:id/orders'
 ---
+
+To charge via Boleto Bancário, you must create a payment order. This section will show the main actions necessary for the good management of your payments by Boleto Bancário.
+
+> 💡 Due to the request of the **Central Bank**, it is necessary for the customer to have a complete registration, including address for the Boleto Bancário to be generated successfully.
 
 * Request type: **\[POST]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/orders
 ```
+
+| **Parameter**           | **Type**           | **Description**                                                            | **Required**                                            |
+| ----------------------- | ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `customerId`            | integer            | Customer ID                                                                | Yes                                                    |
+| `fingerprint`           | string             | User session unique identifier                                              | No                                                     |
+| `includeFeeTransfer`    | boolean            | Indicates whether fees should be passed on to the consumer                  | No                                                     |
+| `amount`                | decimal            | Total amount to be charged                                                  | Yes                                                    |
+| `products`              | array object      | Products associated with payment                                            | No                                                     |
+| `products.productId`    | integer            | [Product](https://www.notion.so/Products-214efc5818e940a1803c21873e89557c?pvs=21) ID | Yes, if the products property is used                    |
+| `products.quantity`     | decimal            | Quantity of the product associated with the payment                        | Yes, if the products property is used                    |
+| `description`           | string             | Sale Description                                                            | Yes                                                    |
+| `generateAllBoletos`    | boolean            | In the case of purchases in installments, this property defines whether all payment slips will be generated and sent to the Consumer at the time of purchase. | No, if the property is omitted or if the value is set to `false`, the installment/slip will be generated/sent to the Consumer automatically every due date |
+| `voucher`               | string             | Discount coupon                                                             | No                                                     |
+| `payment`               | object             | Payment information                                                         | Yes                                                    |
+| `payment.type`          | string             | Payment type (boleto)                                                       | Yes                                                    |
+| `payment.installments`  | integer            | Number of installments. Available up to 12 installments.                   | Yes                                                    |
+| `payment.dueDate`       | date               | Due date                                                                    | Yes                                                    |
+| `payment.lateFee`       | object             | Late fee charge                                                             | No                                                     |
+| `payment.lateFee.amount`| decimal            | Amount                                                                     | When `mode` is `daily_amount` or `fixed`                |
+| `payment.lateFee.percentage`| decimal        | Percentage                                                                 | When `mode` is `daily_percentage`, `monthly_percentage`, or `percentage` |
+| `payment.mode`          | string             | Billing type                                                                | No                                                     |
+| `payment.mode.daily_percentage` | string     | Percentage per day                                                          | No                                                     |
+| `payment.mode.daily_amount`     | string     | Fixed amount per day                                                        | No                                                     |
+| `payment.mode.monthly_percentage` | string   | Percentage per month                                                        | No                                                     |
+| `payment.mode.fixed`          | string      | Fixed value                                                                | No                                                     |
+| `payment.mode.percentage`     | string      | Percentage value                                                           | No                                                     |
+| `payment.interestOrFine` | object             | Late interest charges                                                       | No                                                     |
+| `payment.discount`      | object             | Discount                                                                   | No                                                     |
+| `payment.discount.limitDate` | date          | The deadline for granting the discount **must** be greater than or equal to the current date. Backdates on these properties return a 500 error. | Yes                                                    |
+| `payment.tax`           | object             | Additional fees                                                            | No                                                     |
+| `payment.splits`        | array object     | Splits                                                                     | No                                                     |
+| `payment.splits.splitRuleId` | integer       | Identifier                                                                 | Yes                                                    |
+| `metadata`              | dictionary         | Used to save miscellaneous information in dictionary format (key-value)    | No                                                     |
+| `warrantyDays`          | integer            | Service Warranty Time in Days                                              | No                                                     |
+| `whenShouldIssueNfe`    | integer            | When to issue the NFe                                                       | Yes, if the `sendNfeToCustomer` property is used       |
+| `whenShouldIssueNfe.0`  |                    | At the time of sale                                                         | No                                                     |
+| `whenShouldIssueNfe.1`  |                    | After warranty                                                              | No                                                     |
+| `whenShouldIssueNfe.2`  |                    | Do not issue                                                                | No                                                     |
+| `sendNfeToCustomer`     | boolean            | Send invoice to consumer                                                    | Yes, if the `whenShouldIssueNfe` property is used      |
+
+
+> NFE properties are only available in case of integration with eNotas.
+
+
+### Status related to Order
+
+| **Status** | Meaning                                                    |
+| ---------- | ---------------------------------------------------------- |
+| `New`      | Temporary status, if this status persists, contact support |
+| `Succeded` | Order created successfully                                 |
+| `Canceled` | Order canceled                                             |
+| `Failed`   | Failed during order creation                               |
+
+### Status related to Payment
+
+| **Status**          | Meaning                                                    |
+| ------------------- | ---------------------------------------------------------- |
+| `New`               | Temporary status, if this status persists, contact support |
+| `Pending`           | Pending payment                                            |
+| `Succeded`          | Payment made successfully                                  |
+| `Canceled`          | Payment Canceled                                           |
+| `Dispute`           | Payment in Dispute                                         |
+| `Failed`            | Payment Failure                                            |
+| `ChargedBack`       | Payment Failure                                            |
+| `DisputeSucceeded`  | Dispute Overdue                                            |
+| `PartiallySucceded` | Payment partially made                                     |
+| `PartiallyCanceled` | Payment partially canceled                                 |
+
+>
+  💡 Important: the discount coupon changes the final value of the Payment Order.
+
+
+### Request example
+
+This is an example of how your request to create a new Payment Order with the payment method Boleto in installments, where the slips will be generated and sent to the consumer instantly, should look like. The `generateAllBoletos` property is used to generate all slips. Use this property with the value `false` so that the slips are generated automatically, **only** at each due date.
+
+* Body
+
+```json
+  {
+      "generateAllBoletos": true,
+      "includeFeeTransfer": false,
+      "amount": 100,
+      "customerId": 14953,
+      "description": "Celular IPhone 12 Max Pro",
+      "payment": {
+          "type": "boleto",
+          "installments": 2,
+          "dueDate": "2022-08-25",
+          "discount": {
+              "mode": "percentage",
+              "percentage": 1,
+              "limitDate": "2022-08-25"
+          },
+          "lateFee": {
+              "mode": "percentage",
+              "percentage": 1
+          },
+          "interestOrFine": {
+              "mode": "monthly_percentage",
+              "percentage": 1
+          }
+      },
+      "tax": {
+          "mode": "percentage",
+          "amount": 1
+      },
+  		"metadata": {
+          "id": "17a17c37-b83f-4efd-a629-3c0fd692345d",
+          "user": "admin",
+          "permission": "all"
+      },
+      "warrantyDays": 30,
+      "whenShouldIssueNfe": 0,
+      "sendNfeToCustomer": true
+  }
+  ```
+
+### **Responses**
+
+* 200: OK
+
+```json
+  {
+      "id": 192552,
+      "storeId": 359,
+      "storeName": "Ontop",
+      "number": "P545048",
+      "includeFeeTransfer": false,
+      "amount": 50.0,
+      "netAmount": 50.0,
+      "fee": 0.0,
+      "splits": [],
+      "currency": "BRL",
+      "description": "Celular IPhone 12 Max Pro",
+      "status": "Succeded",
+      "createdOn": "2022-08-23T09:28:56.230336Z",
+      "customer": {
+          "id": 14953,
+          "firstName": "Luana Elaine",
+          "surname": "Dias",
+          "identificationNumber": "10019073615",
+          "birthdate": "1968-08-08T00:00:00",
+          "email": "luana.elaine.dias@email.com",
+          "phone": "(17) 2765-2965",
+          "address": {
+              "street": "Rua Rio de Janeiro",
+              "number": "702",
+              "zipCode": "77060160",
+              "reference": null,
+              "district": "Jardim Aureny I (Taquaralto)",
+              "city": "Palmas",
+              "state": "SP",
+              "country": "BR"
+          }
+      },
+      "products": [],
+      "payment": {
+          "id": 192542,
+          "number": "23413931d54946a9bd8fba0000afb694",
+          "amount": 50.0,
+          "type": "Boleto",
+          "installments": 2,
+          "dueDate": "2022-09-25T00:00:00",
+          "barcode": "34191092550396886893931339210002891190000005000",
+          "boletoUrl": "https://{safe-url}/boletos/P54504891C64.html",
+          "lateFee": {
+              "mode": "Percentage",
+              "percentage": 1.0
+          },
+          "interestOrFine": {
+              "mode": "Monthly_Percentage"
+          },
+          "discount": {
+              "mode": "Percentage",
+              "percentage": 1.0,
+              "limitDate": "2022-08-25T00:00:00"
+          },
+          "createdOn": "2022-08-23T09:28:56.2303377Z",
+          "receivedOn": null,
+          "status": "Pending"
+      },
+      "payments": [],
+      "receivables": [
+          {
+              "id": 1073,
+              "installment": 1,
+              "orderNumber": "P545048",
+              "amount": 50.0,
+              "barcode": "34191092550396878893931339210002590880000005000",
+              "boletoUrl": "https://{safe-url}/boletos/P545048EDB50.html",
+              "expectedOn": "2022-08-25T00:00:00",
+              "receivedOn": null,
+              "createdOn": "2022-08-23T09:28:59.0989097Z",
+              "referenceId": "2dd38e0d708642509bdfe7f2730378de",
+              "status": "Sent"
+          },
+          {
+              "id": 1074,
+              "installment": 2,
+              "orderNumber": "P545048",
+              "amount": 50.0,
+              "barcode": "34191092550396886893931339210002891190000005000",
+              "boletoUrl": "https://{safe-url}/boletos/P54504891C64.html",
+              "expectedOn": "2022-09-25T00:00:00",
+              "receivedOn": null,
+              "createdOn": "2022-08-23T09:29:01.4162232Z",
+              "referenceId": "23413931d54946a9bd8fba0000afb694",
+              "status": "Sent"
+          }
+      ],
+      "fxPayment": null,
+      "tax": {
+          "mode": "Percentage",
+          "amount": 1.0
+      },
+      "isMultiplePayments": false,
+      "paymentLink": null,
+  		"metadata": {
+          "id": "17a17c37-b83f-4efd-a629-3c0fd692345d",
+          "user": "admin",
+          "permission": "all"
+      },
+      "chargeDaysBefore": null,
+      "warrantyDays": 30,
+      "whenShouldIssueNfe": "OnSell",
+      "sendNfeToCustomer": true,
+      "printableLink": null,
+      "xmlLink": null
+  }
+  ```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+
+
+```json
+  {
+      "errors": {
+          "Order": [
+              "Customer not found"
+          ]
+      },
+      "metadata": null,
+      "type": "https://httpstatuses.com/400",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "One or more errors ocurred",
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  
+  ```json
+
+  {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+      "type": "https://httpstatuses.com/403",
+      "title": "Unauthorized",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 500: Internal Server ErrorThis is the answer for cases where an internal server error occurs.
+
+```json
+  {
+      "type": "https://httpstatuses.com/500",
+      "title": "Internal Server Error",
+      "status": 500,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+***

@@ -1,0 +1,204 @@
+---
+title: 'List sales'
+openapi: 'GET https://api.premepay.com/v1/stores/:id/orders '
+---
+
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/orders
+```
+
+
+Would you like to list sales as Business?
+ Use the endpoint:
+   ```json
+    `https://api.premepay.com/v1/businesses/:id/orders`
+    ```
+
+Through the above routes you will be able to view a list of all payment orders. Check below the possible responses of the Primefy API for this request.
+
+### **Responses**
+
+- 200: Ok
+    
+    This is the answer for cases where your request is successful.
+    
+ ```json
+    {
+        "results": [
+            {
+                "id": 192545,
+                "storeId": 359,
+                "storeName": "Ontop",
+                "number": "P709465",
+                "includeFeeTransfer": false,
+                "amount": 310.00,
+                "netAmount": 295.24,
+                "fee": 14.76,
+                "splits": [
+                    {
+                        "splitRule": {
+                            "id": 588,
+                            "recipient": {
+                                "id": 382,
+                                "name": "Kennedy Teste 5"
+                            },
+                            "type": "Percentage",
+                            "disputeLiable": true,
+                            "refundLiable": true,
+                            "percentage": 2.0000,
+                            "fixed": 2.00
+                        },
+                        "saleCommission": {
+                            "amount": 8.20,
+                            "status": "Succeded",
+                            "createdOn": "2022-08-22T12:34:56"
+                        }
+                    }
+                ],
+                "currency": "BRL",
+                "description": "Produtos Diversos",
+                "status": "Succeded",
+                "createdOn": "2022-08-22T12:34:54",
+                "customer": {
+                    "id": 14913,
+                    "firstName": "Calebe Carlos Osvaldo Ribeiro",
+                    "surname": "",
+                    "identificationNumber": "22441639544",
+                    "birthdate": null,
+                    "email": "calebecarlosribeiro@outlock.com.br",
+                    "phone": null
+                },
+                "products": [
+                    {
+                        "id": 21,
+                        "name": "name",
+                        "description": "description",
+                        "unitPrice": 100.00,
+                        "quantity": 3.0,
+                        "packageDimension": null,
+                        "images": []
+                    },
+                    {
+                        "id": 28,
+                        "name": "product 28",
+                        "description": "description",
+                        "unitPrice": 10.00,
+                        "quantity": 1.0,
+                        "packageDimension": null,
+                        "images": []
+                    }
+                ],
+                "payment": {
+                    "id": 192535,
+                    "number": "f16af7ec2ca74a11ba0306bef3a62005",
+                    "amount": 310.00,
+                    "type": "Credit",
+                    "installments": 1,
+                    "card": {
+                        "cardBrand": "Visa",
+                        "holderName": "Calebe Carlos Osvaldo Ribeiro",
+                        "expirationMonth": 2,
+                        "expirationYear": 2029,
+                        "firstDigits": "4539",
+                        "lastDigits": "5497"
+                    },
+                    "lateFee": null,
+                    "interestOrFine": null,
+                    "discount": null,
+                    "createdOn": "2022-08-22T12:34:54",
+                    "receivedOn": "2022-08-22T12:34:55",
+                    "status": "Succeded"
+                },
+                "payments": [],
+                "receivables": [],
+                "fxPayment": null,
+                "tax": null,
+                "isMultiplePayments": false,
+                "paymentLink": null,
+                "metadata": {},
+                "chargeDaysBefore": null,
+                "warrantyDays": 30,
+                "whenShouldIssueNfe": "OnSell",
+                "sendNfeToCustomer": true,
+                "printableLink": null,
+                "xmlLink": null
+            },
+    		],
+    		"totalNumber": 0
+    }
+    
+    ```
+    
+- 400: Bad Request
+    
+    This is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+    
+```json
+
+    {
+        "errors": {
+            "Products": [
+                "product 999 not found"
+            ]
+        },
+        "metadata": null,
+        "type": "https://httpstatuses.com/400",
+        "title": "Bad Request",
+        "status": 400,
+        "detail": "One or more errors ocurred",
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+    {
+        "type": "https://httpstatuses.com/401",
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Unauthorized",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

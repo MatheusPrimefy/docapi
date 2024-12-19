@@ -1,10 +1,94 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'List plans'
+openapi: POST 'https://api.premepay.com/v1/stores/:id/plans'
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[GET]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/:id/plans
 ```
+
+Through the above route you will receive a list of all your registered subscription plans. This is a preview list.
+
+Check out the possible responses from the Primefy API to this request below.
+
+### **Responses**
+
+- 200: OK
+    
+    This is the answer for cases where your request is successful.
+    
+    ```json
+    [
+        {
+            "id": 19740,
+            "storeId": 359,
+            "name": "Plano com 3 ciclos",
+            "description": "Plano com 3 ciclos",
+            "frequency": 2,
+            "productCategory": null,
+            "products": null,
+            "maxCharges": 3,
+            "chargeDaysBefore": 2,
+            "paymentTypes": [
+                1
+            ],
+            "amount": 100.00,
+            "currency": "BRL",
+            "gracePeriod": 0,
+            "status": 0,
+            "tax": null,
+            "isVisible": null
+        },
+        {
+            "id": 19742,
+            "storeId": 359,
+            "name": "teste limite boleto",
+            "description": "teste limite boleto",
+            "frequency": 0,
+            "productCategory": null,
+            "products": null,
+            "maxCharges": null,
+            "chargeDaysBefore": 1,
+            "paymentTypes": [
+                1
+            ]
+    		}
+    ]
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Unauthorized",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/403",
+        "title": "Forbidden",
+        "status": 403,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+---

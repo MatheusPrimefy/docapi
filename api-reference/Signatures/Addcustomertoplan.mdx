@@ -1,10 +1,236 @@
 ---
-title: 'Add new images to the product'
-openapi: POST 'https://api.premepay.com/v1/stores/:id/products/:id/images'
+title: 'Add customer to plan'
+openapi: POST 'https://api.premepay.com/v1/stores/{storeId}/subscriptions'
 ---
 
 * Request type: **\[POST]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/products/:id/images
+https://api.premepay.com/v1/stores/{storeId}/subscriptions
 ```
+
+Learn how to manage your existing subscription plans.
+
+By having a Subscription Plan registered, you will be able to manage users associated with this Subscription Plan. Adding your consumer to a subscription plan, updating a subscription and performing a subscription deletion are some of the management possibilities. The Subscription Plan contemplates the national and international markets.
+
+> 💡 **Do you already have a Subscription Plan?**
+> You will be able to enroll users in Subscription Plans once you have an existing Subscription Plan.
+
+Using the above route you can add a subscription to a payment plan. Remember that this action will only be valid when you have a registered subscription plan. For International Plans, the "currency" element must be inserted in the body of the requisition.
+
+When creating a Subscription in a Plan, the first charge will be made immediately for the respective indicated payment method, that is, for subscriptions created using a credit card, the first initial charge will be made based on the indicated amount, with the next ones being carried out according to the indicated frequency. For cases where the Signature was created using Boleto or Pix payment methods, it will be sent to the Customer, also following the indicated frequency.
+
+### **Parameters List**
+
+| **Parameter**      | **Type**        | **Description**                                                                                                                                 | **Required**                                                                                                                                     |
+| ------------------ | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `fingerprint`      | string          | User session unique identifier                                                                                                                 | No                                                                                                                                               |
+| `includeFeeTransfer`| boolean         | Indicates whether fees should be passed on to the consumer                                                                                      | No                                                                                                                                               |
+| `planId`           | integer         | Plan identifier                                                                                                                                  | Yes                                                                                                                                              |
+| `customerId`       | integer         | Consumer identifier                                                                                                                             | Yes                                                                                                                                              |
+| `currency`         | string          | Alpha code of the currency to be processed. Example: "GBP", "USD", "CAD"                                                                       | Yes (for International Plans)                                                                                                                    |
+| `payment`          | object          | Payment information                                                                                                                             | Yes                                                                                                                                              |
+| `payment.type`     | string          | Type of payment                                                                                                                                  | Yes                                                                                                                                              |
+|                    | `credit`        | Credit card                                                                                                                                     |                                                                                                                                                  |
+|                    | `boleto`        | Bank Slip (Boleto Bancário)                                                                                                                     |                                                                                                                                                  |
+|                    | `pix`           | Pix                                                                                                                                             |                                                                                                                                                  |
+| `payment.cardId`   | integer         | Card identifier                                                                                                                                  | Required if **type** is **credit**                                                                                                               |
+| `splits`           | array object   | Split                                                                                                                                           | No                                                                                                                                               |
+| `splits.splitRuleId`| integer         | Required if there are associated Splits                                                                                                         | Yes                                                                                                                                              |
+| `metadata`         | dictionary      | Used to save miscellaneous information in dictionary format (key-value)                                                                         | No                                                                                                                                               |
+| `daysBetweenRetries`| integer         | Number of days between billing retries                                                                                                          | No                                                                                                                                               |
+| `maxRetries`       | integer         | Maximum number of retries                                                                                                                       | No                                                                                                                                               |
+
+
+
+
+
+### Status related to Subscription
+
+| Status   | Meaning  |
+| -------- | -------- |
+| active   | Active   |
+| canceled | Canceled |
+| pending  | Pending  |
+
+### **Request example**
+
+This is an example of what your request to add a subscription to a subscription plan might look like.
+
+* Body
+
+```json
+  {
+    "planId": 94651,
+    "customerId": 2345,
+    "payment": {
+      "type": "credit",
+      "cardId": 76564
+    },
+  "splits": [
+  		{	"splitRuleId": 584 },
+  		{	"splitRuleId": 585 },
+  	],
+  "metadata": {
+          "id": "17a17c37-b83f-4efd-a629-3c0fd692345d",
+          "invoice": "false"
+      }
+  }
+  ```
+
+### **Responses**
+
+* 201: CreatedThis is the answer for cases where your request is successful.
+
+
+```json
+  {
+      "id": 112035,
+      "paymentType": "Credit",
+      "lastPayment": "2022-08-22T10:28:49.4634826Z",
+      "nextPayment": "2022-09-22T10:28:51.2607061Z",
+      "status": "Active",
+      "retries": 0,
+      "maxRetries": 60,
+      "daysBetweenRetries": 3,
+      "metadata": {
+          "id": "17a17c37-b83f-4efd-a629-3c0fd692345d",
+          "invoice": "false"
+      },
+      "createdOn": "2022-08-22T10:28:49.4195634Z",
+      "plan": {
+          "id": 19830,
+          "name": "Plan com Produtos",
+          "amount": 9.90,
+          "products": [
+              {
+                  "id": 29,
+                  "name": "name",
+                  "description": "description",
+                  "quantity": 2,
+                  "unitPrice": 9.90
+              }
+          ],
+          "currency": "BRL",
+          "gracePeriod": 0,
+          "frequency": "Monthly",
+          "status": "Active",
+          "maxCharges": 0,
+          "chargeDaysBefore": 1,
+          "tax": null,
+          "isVisible": true
+      },
+      "customer": {
+          "id": 14732,
+          "firstName": "Rebeca Isabelle",
+          "surname": "Simone Novaes",
+          "identificationNumber": "02683143818",
+          "birthdate": "1968-08-08T00:00:00",
+          "email": "pefal33081@yubua.com",
+          "phone": "(17) 3435-1677",
+          "address": {
+              "street": "Rua Eloi Ferreira da Silva",
+              "number": "355",
+              "zipCode": "39314971",
+              "reference": null,
+              "district": "Centro",
+              "city": "Retiro Velho",
+              "state": "MG",
+              "country": "BR"
+          }
+      },
+      "productCategory": null,
+      "orders": [
+          {
+              "id": 192542,
+              "number": "P354722",
+              "includeFeeTransfer": false,
+              "amount": 19.80,
+              "fxAmount": 0.0,
+              "currency": "BRL",
+              "netAmount": 18.30,
+              "fee": 1.50,
+              "description": "Este plano possui 1 Produto",
+              "status": "Succeded",
+              "createdOn": "2022-08-22T10:28:49.4634826Z",
+              "payment": {
+                  "id": 192532,
+                  "number": "dca2f633a6cf4e1d9d3f56ff6d08734b",
+                  "amount": 19.80,
+                  "type": "Credit",
+                  "installments": 1,
+                  "card": {
+                      "cardBrand": "Visa",
+                      "holderName": "Seu Mane - Card Declined",
+                      "expirationMonth": 6,
+                      "expirationYear": 2030,
+                      "firstDigits": "4539",
+                      "lastDigits": "5497"
+                  },
+                  "lateFee": null,
+                  "interestOrFine": null,
+                  "discount": null,
+                  "createdOn": "2022-08-22T10:28:49.463483Z",
+                  "receivedOn": "2022-08-22T10:28:50+00:00",
+                  "status": "Succeded"
+              },
+              "splits": [],
+              "fxPayment": null,
+              "paymentLink": null,
+              "userTracking": null
+          }
+      ]
+  }
+  ```
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error response. Below is the complete list of possible error responses:
+
+* 400: Bad RequestThis is the answer for cases where the server does not process the request due to an error encountered. Some examples that can result in this error are a misspelled URL, malformed syntax, or invalid routing request.
+
+
+```json
+  {
+    "errors": [
+      {
+        "message": "Error description" 
+      }
+    ]
+  }
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).
+  
+  
+  ```json
+
+  {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 403: Forbidden
+
+This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+      "type": "https://httpstatuses.com/403",
+      "title": "Unauthorized",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+  }
+  ```
+
+* 500: Internal Server Error
+
+This is the answer for cases where an internal server error occurs.
+
+***

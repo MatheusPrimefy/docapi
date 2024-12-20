@@ -1,9 +1,87 @@
-title: "Create a new webhook"
-openapi: "POST https://api.premepay.com/v1/stores/:id/endpoints"
+---
+title: "Listar webhooks"
+openapi: "GET https://api.premepay.com/v1/stores/:id/endpoints/"
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[GET]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/endpoints
+https://api.premepay.com/v1/stores/:id/endpoints/
 ```
+
+ Would you like to list withdrawals by Business?
+    
+     Use an endpoint: 
+     
+```json
+`https://api.premepay.com/businesses/:id/endpoints/`
+    ```
+
+You can view all the details of a specific webhook. To do this, just use the route mentioned above. Below are the possible responses from the Preme Pay API to this request.  
+
+### **Responses**
+
+- 200: OK
+    
+    ```json
+    [
+        {
+            "id": 21,
+            "endpoint": "https://webhook.site/526f3c05-3d21-4372-89ee-895f658ffc1feditado",
+            "description": "description",
+            "storeId": 382,
+            "destination": 1,
+            "events": [
+                {
+                    "type": 2
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "endpoint": "https://webhook.site/526f3c05-3d21-4372-89ee-895f658ffc1f",
+            "description": "Payment received",
+            "storeId": 359,
+            "destination": 1,
+            "events": [
+                {
+                    "type": 1
+                }
+            ]
+        }
+    ]
+    ```
+    
+- 401: Not authorized
+    
+    This is the answer for cases where the request was unsuccessful because it does not have valid authentication credentials for the target resource. ****
+    If necessary, you can review our ****[authentication-process](notion://www.notion.so/autenticacao).****
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been forbidden. This happens when the server can understand the request, but does not authorize the issuance of an approval response.
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+
+---

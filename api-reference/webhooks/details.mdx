@@ -1,9 +1,90 @@
-title: "Create a new webhook"
-openapi: "POST https://api.premepay.com/v1/stores/:id/endpoints"
+---
+title: "details of a webhook"
+openapi: "GET https://api.premepay.com/v1/stores/:id/endpoints/:id"
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[GET]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/endpoints
+https://api.premepay.com/v1/stores/:id/endpoints/:id
 ```
+
+- Would you like to list webhooks by Business?
+    
+    Use the endpoint:
+```json
+`https://api.premepay.com/businesses/:id/endpoints/:id`
+``
+
+You can view all the details of a specific webhook. To do this, simply use the mentioned route above. Below are the possible responses from the Primefy API for this request.
+
+### **Responses**
+
+- 200: OK
+    
+    ```json
+    {
+        "id": 37,
+        "endpoint": "url",
+        "description": "descrição opcional",
+        "storeId": 359,
+        "destination": 0,
+        "events": [
+            {
+                "type": 0
+            },
+            {
+                "type": 1
+            },
+            {
+                "type": 2
+            },
+            {
+                "type": 3
+            },
+            {
+                "type": 4
+            },
+            {
+                "type": 5
+            },
+            {
+                "type": 6
+            }
+        ]
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+
+---

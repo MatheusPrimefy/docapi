@@ -1,9 +1,96 @@
-title: "Create a new webhook"
-openapi: "POST https://api.premepay.com/v1/stores/:id/endpoints"
+---
+title: "Edit a webhook"
+openapi: "PUT https://api.premepay.com/v1/stores/:id/endpoints/:id"
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[PUT]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/endpoints
+https://api.premepay.com/v1/stores/:id/endpoints/:id
 ```
+
+You can change all the details of a specific webhook. To do this, simply use the route mentioned above. See below the possible responses from the Primefy API for this request.
+
+### Request example
+
+This is an example of what your request to update a webhook might look like.
+
+* Body
+
+```json
+  {
+      "endpoint": "url alterada",
+  		"description": "descrição opcional",
+  		"destination": 0,
+      "events": [
+          { "type": 0 },
+          { "type": 1 }
+      ]
+  }
+```
+
+### **Responses**
+
+If your request is successful, you will receive the return of the webhook object.
+
+If your request has invalid creation parameters - for example, specifying an invalid coupon or source - you may receive an error response. See below for the full list of possible responses.
+
+* 200: OK
+
+```json
+  {
+      "id": 38,
+      "endpoint": "url alterada",
+      "description": "descrição opcional",
+      "storeId": 359,
+      "destination": 0,
+      "events": [
+          { "type": 0 },
+  				{ "type": 1 }
+      ]
+  }
+```
+
+* 400: Bad Request
+
+```json
+  {
+      "type": "https://httpstatuses.com/400",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "endpoint not found"
+  }
+```
+
+* 401: Unauthorized
+
+This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+
+```json
+{
+  "type": "https://httpstatuses.com/401",
+  "title": "Unauthorized",
+  "status": 401,
+  "detail": null,
+  "instance": null,
+  "extensions": {}
+}
+```
+
+* 403: Forbidden
+
+This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+```
+
+***

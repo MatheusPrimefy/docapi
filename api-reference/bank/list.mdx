@@ -1,69 +1,71 @@
 ---
 title: "List bank accounts"
-openapi: "POST https://api.premepay.com/v1/stores/:id/bank_accounts"
+openapi: "GET https://api.premepay.com/v1/stores/:id/bank_accounts"
 ---
+* Request type: **\[GET]**
+
+```json
+https://api.premepay.com/v1/stores/:id/bank_accounts
+```
 
 ### **Responses**
 
-- 200: OK
-    
-    ```json
-    [
-        {
-            "id": 300,
-            "bankAccountId": "4cbd9f401d7d480987b19ec7316f9442",
-            "holderName": "Vinicius Mateus Augusto Rodrigues",
-            "bankCode": "341",
-            "routingNumber": "6423",
-            "accountNumber": "555703",
-            "identificationNumber": "36044799409",
-            "type": "Checking",
-            "isActive": false
-        },
-        {
-            "id": 302,
-            "bankAccountId": "3a387e10c1304da4a257e3d6f947d06d",
-            "holderName": "Vinicius Mateus Augusto Rodrigues",
-            "bankCode": "341",
-            "routingNumber": "6423",
-            "accountNumber": "555703",
-            "identificationNumber": "36044799409",
-            "type": "Checking",
-            "isActive": true
-        }
-    ]
-    ```
-    
-- 401: Unauthorized
-    
-    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
-    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
-    
-    ```json
-    {
-      "type": "https://httpstatuses.com/401",
-      "title": "Unauthorized",
-      "status": 401,
-      "detail": null,
-      "instance": null,
-      "extensions": {}
-    }
-    ```
-    
-- 403: Forbidden
-    
-    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
-    
-    ```json
-    {
-      "type": "https://httpstatuses.com/403",
-      "title": "Forbidden",
-      "status": 403,
-      "detail": null,
-      "instance": null,
-      "extensions": {}
-    }
-    ```
-    
+* 200: OK
+```json
+  [
+      {
+          "id": 300,
+          "bankAccountId": "4cbd9f401d7d480987b19ec7316f9442",
+          "holderName": "Vinicius Mateus Augusto Rodrigues",
+          "bankCode": "341",
+          "routingNumber": "6423",
+          "accountNumber": "555703",
+          "identificationNumber": "36044799409",
+          "type": "Checking",
+          "isActive": false
+      },
+      {
+          "id": 302,
+          "bankAccountId": "3a387e10c1304da4a257e3d6f947d06d",
+          "holderName": "Vinicius Mateus Augusto Rodrigues",
+          "bankCode": "341",
+          "routingNumber": "6423",
+          "accountNumber": "555703",
+          "identificationNumber": "36044799409",
+          "type": "Checking",
+          "isActive": true
+      }
+  ]
+  ```
 
----
+* 401: Unauthorized
+
+This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).\*\*\*\*
+  
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+***

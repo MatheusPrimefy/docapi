@@ -1,0 +1,219 @@
+---
+title: "Create a new webhook"
+openapi: "POST https://api.premepay.com/v1/stores/:id/endpoints"
+---
+
+* Request type: **\[POST]**
+
+```json
+https://api.premepay.com/v1/stores/:id/endpoints
+```
+
+
+### List of Parameters for webhook registration
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `endpoint` | string | Endpoint to which Primefy will notify |
+| `description` | string | Description |
+| `destination` | string | Destination |
+| `events` | array int |  |
+|      `type` | int | What type of notification should be sent to the Endpoint |
+
+### Parameters related to the property `destination`:
+
+| Parameter | Type | Destination |
+| --- | --- | --- |
+| `0` | int | API |
+| `1` | int | Pluga |
+| `2` | int | Zappier |
+| `3` | int | IFTTT |
+
+### Parameters related to the property ****`type`**:**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `0` | Transaction Created | For created purchases that are awaiting payment, such as Boleto and PIX. |
+| `1` | Transaction Succeded | For confirmed Payment Orders via Credit Card, Boleto, and PIX. |
+| `2` | Transaction Canceled | For payments that have undergone Full or Partial Refund. |
+| `3` | Transaction Failed | For failed Payment Orders. |
+| `4` | Transaction Disputed | For Payment Order where the customer decided to dispute, opening a Dispute. |
+| `5` | Transaction Chargedback | For when the open dispute has been lost and the payment refunded to the customer. |
+| `6` | Transaction Dispute Succeded | For when the customer loses the Dispute. |
+
+### Request example
+
+This is an example of what your request to register a new webhook might look like.
+
+- Body
+    
+    ```json
+    {
+        "endpoint": "url",
+    		"description": "descrição opcional",
+    		"destination": 0,
+        "events": [
+            { "type": 0 },
+            { "type": 1 },
+            { "type": 2 },
+            { "type": 3 },
+    				{ "type": 4 },
+    				{ "type": 5 },
+    				{ "type": 6 }
+        ]
+    }
+    ```
+    
+
+### **Responses**
+
+If your request is successful, you will receive the return of the Voucher object.
+
+If your request has invalid creation parameters - for example, specifying an invalid field or value - you may receive an error in response. See below for the full list of possible responses.
+
+- 200: OK
+    
+    ```json
+    {
+    		"id": 8,
+        "endpoint": "url",
+    		"description": "descrição opcional",
+    		"destination": 0
+        "events": [
+            { "type": 0 },
+            { "type": 1 },
+            { "type": 2 },
+            { "type": 3 },
+    				{ "type": 4 },
+    				{ "type": 5 },
+    				{ "type": 6 }
+        ]
+    }
+    ```
+    
+- 400: Bad Request
+    
+    This is the return informing the error message:
+    
+    ```json
+    {
+        "errors": {
+            "Destination": [
+                "The field Destination is invalid."
+            ]
+        },
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "traceId": "|7502bf86-47c1fe46efb71345."
+    }
+    ```
+    
+- 401: Unauthorized
+    
+    This is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+    If needed, you can review our [authentication process](https://www.notion.so/Authentication-c941a0cb8e2647b187d87fcf8a314b37?pvs=21).****
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/401",
+      "title": "Unauthorized",
+      "status": 401,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 403: Forbidden
+    
+    This is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+    
+    ```json
+    {
+      "type": "https://httpstatuses.com/403",
+      "title": "Forbidden",
+      "status": 403,
+      "detail": null,
+      "instance": null,
+      "extensions": {}
+    }
+    ```
+    
+- 500: Internal Server Error
+    
+    This is the answer for cases where an internal server error occurs.
+    
+    ```json
+    {
+        "type": "https://httpstatuses.com/500",
+        "title": "Internal Server Error",
+        "status": 500,
+        "detail": null,
+        "instance": null,
+        "extensions": {}
+    }
+    ```
+    
+
+Below is the JSON object that the establishment will receive in its API (if registered as the destination) when a notification event is triggered:
+
+```json
+{
+    "number": "P654762",
+    "amount": "99.00",
+    "status": "succeded",
+    "payment": {
+        "status": "succeded"
+    },
+    "paymentUrl": null,
+    "metadata": {
+        "test1": "test1",
+        "test2": "test2"
+    }
+}
+```
+
+If the destination is one of the external tools, the object is a bit more comprehensive, as shown below:
+
+```json
+{
+	"order": {
+		"number": "P735831",
+		"description": "Compra",
+		"status": "Confirmado"
+	},
+	"customer": {
+		"name": "Usuário Teste Exemplo 01",
+		"identificationNumber": "52789024006",
+		"email": "email@123.com",
+		"phone": "(11) 12345-6789",
+		"address": {
+			"street": "Rua tal",
+			"number": "123",
+			"district": "Brás",
+			"reference": "Casa",
+			"zipcode": "02814000",
+			"city": "São Paulo",
+			"state": "SP",
+			"country": "BR"
+		}
+	},
+	"payment": {
+		"installments": 3,
+		"installment": 0, // só vai preenchido se for uma PARCELA de boleto
+		"amount": "R$ 99,00",
+		"type": "Cartão de Crédito",
+		"status": "Confirmado",
+		"receivedOn": "26/03/2022 06:38:32"
+	},
+	"metadata": {
+		"teste1": "teste1",
+		"teste2": "teste2"
+	},
+	"createdOn": "26/03/2022 06:38:31",
+	"updatedOn": "26/03/2022 06:38:31"
+}
+```
+
+---

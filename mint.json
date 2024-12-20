@@ -176,6 +176,15 @@
       ]
     },
      {
+      "group": "Bank",
+      "pages": [
+        "api-reference/bank/create",
+        "api-reference/bank/list",
+        "api-reference/bank/details",
+        "api-reference/bank/activate"
+      ]
+    },
+     {
       "group": "Webhooks",
       "pages": [
         "api-reference/webhooks/create",

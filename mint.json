@@ -178,9 +178,11 @@
      {
       "group": "Webhooks",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/webhooks/create",
+        "api-reference/webhooks/delete",
+        "api-reference/webhooks/details",
+        "api-reference/webhooks/edit",
+        "api-reference/webhooks/listar"
       ]
     }
   ],

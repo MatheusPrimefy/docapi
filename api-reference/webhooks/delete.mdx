@@ -1,9 +1,63 @@
-title: "Create a new webhook"
-openapi: "POST https://api.premepay.com/v1/stores/:id/endpoints"
+---
+title: " Delete webhook"
+openapi: "DELETE https://api.premepay.com/v1/stores/:id/endpoints/:id"
 ---
 
-* Request type: **\[POST]**
+* Request type: **\[DELETE]**
 
 ```json
-https://api.premepay.com/v1/stores/:id/endpoints
+https://api.premepay.com/v1/stores/:id/endpoints/:id
 ```
+
+You can remove a specific webhook. To do this, just use the route mentioned above. See below the possible responses from the Pimefy API for this request.
+
+>  ⚠️ **Attention:** This action is irreversible.
+
+
+### **Responses**
+
+If your request is successful, you will receive a 200-OK return and the webhook will have been success
+fully removed
+
+* 200: OK
+
+* 400: Bad Request
+
+
+```json
+  {
+      "type": "https://httpstatuses.com/400",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "endpoint not found"
+  }
+  ```
+
+* 401: UnauthorizedThis is the response for cases where the request was unsuccessful because it lacks valid authentication credentials for the target resource.
+  If needed, you can review our [authentication process](https://primefy-e56fa2d4.mintlify.app/api-reference/postaut).
+  
+  
+  
+  ```json
+  {
+    "type": "https://httpstatuses.com/401",
+    "title": "Unauthorized",
+    "status": 401,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```
+
+* 403: ForbiddenThis is the response for cases where the request has been banned. This happens when the server can understand the request request, but does not authorize the issue of an approval response.
+
+```json
+  {
+    "type": "https://httpstatuses.com/403",
+    "title": "Forbidden",
+    "status": 403,
+    "detail": null,
+    "instance": null,
+    "extensions": {}
+  }
+  ```

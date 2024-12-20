@@ -61,10 +61,7 @@
       "group": "Essentials",
       "pages": [
         "Authentication",
-        "Testcards",
-        "api-reference/user/create",
-        "api-reference/webhooks/create",
-        "api-reference/Establishments/creat"
+        "Testcards"  
       ]
     },
     {
